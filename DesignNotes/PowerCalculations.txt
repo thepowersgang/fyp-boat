@@ -1,0 +1,22 @@
+
+Supply Capacity
+===============
+
+Supply: 100W solar panel
+- Approximate power ratio is 4Wh per W of panel (for Perth) = 400Wh per day
+ - [https://www.solarchoice.net.au/blog/how-much-energy-will-my-solar-cells-produce/](Source)
+- Halve to have charging capacity for cloudy days. = 200Wh per day
+- Divide by 24 hours to get the max constant drain = 8.3W
+- Subtract peak control drain of ???mW = 
+
+
+Control Electronics
+===================
+
+APM Board
+---------
+- ATMega641 : 15mA + io currents
+- ATMega32U2 : 21mA + io
+- 
+
+

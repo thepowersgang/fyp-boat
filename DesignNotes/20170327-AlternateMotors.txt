@@ -1,0 +1,38 @@
+Requirements
+============
+
+- 12V input
+- Max 4W power consuption
+
+
+Extras
+=====
+
+Propeller
+---------
+
+Options
+=======
+
+CDM - DC Brushless Motor for Fanner, 12V 6000rpm No Load, 4W Output Powe
+------
+- "CDM" CDM-BL3626I-T1201
+- [http://www.globalsources.com/si/AS/Dongguan-Country/6008849101954/pdtl/DC-Brushless-Motor/1123731124.htm?AGGType=pure](Store link)
+- Extras:
+ - PWM input
+ - Speed feedback
+
+Brushless DC Motor with Encoder 12V 159RPM
+----
+- "DFRobot Australia" DF-FIT0441
+- NOTE: Unknown power, probably 4W
+- [https://littlebirdelectronics.com.au/products/brushless-dc-motor-with-encoder-12v-159rpm](Store Link) 
+- Extras:
+ - PWM speed control
+ - Direction control
+ - Feedback pulse output
+
+
+
+<!-- vim: ft=markdown
+-->
