@@ -1,0 +1,40 @@
+diff --git a/APMrover2/Rover.h b/APMrover2/Rover.h
+index e2224ea..e0a64c0 100644
+--- a/APMrover2/Rover.h
++++ b/APMrover2/Rover.h
+@@ -93,12 +93,15 @@
+ #include "Parameters.h"
+ #include <GCS_MAVLink/GCS.h>
+ 
++#include "satellite_telemetry.h"
++
+ #include <AP_Declination/AP_Declination.h> // ArduPilot Mega Declination Helper Library
+ 
+ class Rover {
+ public:
+     friend class GCS_MAVLINK;
+     friend class Parameters;
++    friend class IridiumTelemtry;
+ 
+     Rover(void);
+ 
+@@ -106,6 +109,10 @@ public:
+     void setup(void);
+     void loop(void);
+ 
++    // BEGIN UWA EE
++    void maybe_send_satellite_ping(void);
++    // END UWA EE
++
+ private:
+     AP_HAL::BetterStream* cliSerial;
+ 
+@@ -173,6 +180,8 @@ private:
+     SITL sitl;
+ #endif
+ 
++    IridiumTelemtry	satellite_telemetry;
++
+     // GCS handling
+     AP_SerialManager serial_manager;
+     const uint8_t num_gcs;

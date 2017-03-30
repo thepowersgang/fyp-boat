@@ -1,6 +1,26 @@
---- APMrover2/APMrover2.cpp
-+++ APMrover2/APMrover2.cpp
-@@ -74,2 +74,3 @@
-     { SCHED_TASK(one_second_loop),       50,   3000 },
-+    //{ SCHED_TASK(send_satellite_telem), 100,   3000 },
- #if FRSKY_TELEM_ENABLED == ENABLED
+diff --git a/APMrover2/APMrover2.cpp b/APMrover2/APMrover2.cpp
+index 26e9129..8844a82 100644
+--- a/APMrover2/APMrover2.cpp
++++ b/APMrover2/APMrover2.cpp
+@@ -137,6 +137,11 @@ void Rover::loop()
+     scheduler.run(remaining);
+ }
+ 
++void Rover::maybe_send_satellite_ping(void)
++{
++    this->satellite_telemetry.maybe_send_ping();
++}
++
+ // update AHRS system
+ void Rover::ahrs_update()
+ {
+@@ -502,6 +507,9 @@ void setup(void)
+ }
+ void loop(void)
+ {
++    // NOTE: Send satellite update outside of the scheduler becuase it might invoke the scheduler
++    rover.maybe_send_satellite_ping();
++
+     rover.loop();
+ }
+ 

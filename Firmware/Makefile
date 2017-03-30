@@ -8,9 +8,9 @@ SRCDIR := ardupilot-source/
 ROVERDIR := $(SRCDIR)APMrover2/
 
 # - Files with associated patches
-PATCHED_FILES := APMrover2/APMrover2.cpp
+PATCHED_FILES := APMrover2/APMrover2.cpp APMrover2/Rover.h APMrover2/Rover.cpp
 # - Brand-new files
-NEW_FILES := 
+NEW_FILES := APMrover2/satellite_telemetry.h APMrover2/satellite_telemetry.cpp
 
 NEW_FILES := $(addprefix $(SRCDIR),$(NEW_FILES))
 PATCHED_FILES := $(addprefix $(SRCDIR),$(PATCHED_FILES))
@@ -31,10 +31,13 @@ ardupilot-source/APMrover2/Makefile:
 	(cd ardupilot-source; git submodule update --init --recursive)
 
 $(PATCHED_FILES): $(SRCDIR)%: mods/%.patch
-	cp -n $@ $@.orig && cp $@.orig $@
+	cd $(SRCDIR); git checkout $(@:$(SRCDIR)%=%)
 	patch $@ $<
 
 $(NEW_FILES): $(SRCDIR)%: mods/%
 	cp $@ $<
 
+repatch:
+	$(foreach f,$(PATCHED_FILES:$(SRCDIR)%=%), (cd $(SRCDIR); git diff $f) > mods/$f.patch &&) true
+	$(foreach f,$(NEW_FILES:$(SRCDIR)%=%), cp $(SRCDIR)$f mods/$f &&) true
 
