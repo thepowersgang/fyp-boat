@@ -1,0 +1,93 @@
+ArduPilot Mega 2.8
+---------------
+- http://ardupilot.org/copter/docs/common-apm25-and-26-overview.html
+- [http://www.atmel.com/Images/Atmel-2549-8-bit-AVR-Microcontroller-ATmega640-1280-1281-2560-2561_datasheet.pdf](ATMega641)
+- USB UART (UART0)
+ - UART0 defaults to either the USB or the "3DA-RADIO" header
+ - Can be configured such that UART0 is USB, UART2 is "3DA-RADIO"
+- GPS port (UART1, 5V nominal) - Labelled "GPS/UART1"
+- I2C port
+- UART2 (Pads only, two pins on bottom of board)
+
+- [http://discuss.ardupilot.org/uploads/default/original/2X/5/5bed8ebdbdec457bde58f8ccd6f829cfabb28909.png](APM2.5 Wiring Diagram)
+ - NOTE: 2.5 and 2.6 are very similar, should be useful.
+ - PWM outputs (LHS) connect to Various ports
+  - 1-2 = PB6-5
+  - 3-6 = PH5-3
+  - 6-8 = PE5-3
+ - PWM inputs (RHS) connect to revers mappigns on Port B of ATmega32U32
+  - NOTE: 5,6,7 are labelled `PPM_{MISO,MOSI,SCK}` (SPI bus)
+ - Analog pins (along top) connect to:
+  - 1-8 = PF0-7
+  - 9 = PK0
+  - 10-12 = SJ0-2 
+   - Selectable between PK1-3 and PB7,PL4-5 (resistor inline)
+
+- ATMega641 USART ports
+ - PJ2-0 = USART3 (xck,tx,rx)
+  - UNAVALIABLE : Pins used for the data flash
+
+
+Solar Cells
+-------------
+- https://www.vicoffroad.com.au/12v-200w-solar-panel-kit-home-generator-caravan-camping-power-mono-charging-641.html.html?gclid=CNDxkICM2tICFZoEKgod7F8PuA
+ - BAD LINK.
+- [https://pethomeoutdoor.com.au/products/12v-200w-solar-panel-kit-home-generator-caravan-camping-power-mono-charging-pwm?variant=30071368961](Possible Alternate) - AU$212 + ? shipping
+ - 12V charger built-in.
+ - 1580x35x808mm
+
+
+Power Regulator
+-----------------------
+- MURATA POWER SOLUTIONS  OKR-T/10-W12-C  DC-DC CONVERTER, NON ISO POL, 1 O/P, 50W, 590mV to 6V 
+- Datasheet: [http://www.farnell.com/datasheets/2238392.pdf](OKR-T/10-W12)
+- [http://au.element14.com/murata-power-solutions/okr-t-10-w12-c/dc-dc-converter-non-iso-pol-1/dp/1792312?mckv=s|pcrid|59148083448&gross_price=true&CATCI=aud-112905144048:pla-173777534688&CAAGID=12550800888&CMP=KNC-GOO-SHOPPING-1792312&CAGPSPN=pla&gclid=CJyi0M7bw9ICFVNwvAodVqEAsA&CAWELAID=120185580000194262](Element 14 Link)
+
+Batteries
+---------
+- [http://www.batteriesdirect.com.au/shop/product/4424/ns40zlsmf.html?gclid=CIC02unn49ICFVgnvQodf2gEQw](Store Link)
+- 12V 196x128x201mm
+
+Motor and Propellor
+------------------
+- Blue Robotics - T100 Thruster
+ - [http://bluerobotics.com/store/thrusters/t100-thruster/](Store link)
+ - 12V, 0.01 - 11.5A
+ - Max thrust ~2.4kgf (13A, 160W)
+ - most efficient at 0.56kgf (0.5A, 6W)
+ - Requires a separate speed controller
+
+Motor ESC
+---------
+- "AfroESC 30A"
+ - (Avaliable with Blue Robotics thrusters)
+ - [http://docs.bluerobotics.com/besc/](Specs)
+ - PWM input, 1100 -> 1900us
+ - NOTE: Provides 5V back-supply to the controller, may eliminate need for regulator?
+
+GPS
+---
+- Adafruit Ultimate GPS Breakout
+ - [https://learn.adafruit.com/assets/22494](Board Diagram)
+ - [https://cdn-shop.adafruit.com/datasheets/GlobalTop-FGPMMOPA6H-Datasheet-V0A.pdf](Chip Datasheet)
+ - [https://core-electronics.com.au/adafruit-ultimate-gps-breakout-66-channel-w-10-hz-updates-version-3.html](Store Link)
+
+Sattelite Modem
+-----
+- "RockBLOCK+"
+ - [https://www.rock7.com/shop-product-detail?productId=4](Store Link)
+ - Connectors:
+  - UART/RS232 connection
+  - 8-32V input
+
+Data Logger
+------------
+- SparkFun OpenLog [https://www.sparkfun.com/products/13712](Store Link)
+ - 3.3-5V input
+ - [https://cdn.sparkfun.com/datasheets/Dev/Arduino/Boards/OpenLog_v15.pdf](Schematic)
+
+
+
+<!-- vim: ft=markdown
+-->
+

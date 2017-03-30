@@ -30,7 +30,7 @@ Satellite modem
 ### Software
 - [http://arduiniana.org/libraries/iridiumsbd/](IridiumSBD)
 - Supports software serial, has callback-based mechanism
-- NOTE: Will need to call the scheduler from within this callback
+ - NOTE: Will need to call the scheduler from within this callback, to ensure continued operation of the system during transmission
 
 
 
