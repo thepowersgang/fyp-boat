@@ -1,26 +1,24 @@
 diff --git a/APMrover2/APMrover2.cpp b/APMrover2/APMrover2.cpp
-index 26e9129..8844a82 100644
+index 26e9129..9e7d07f 100644
 --- a/APMrover2/APMrover2.cpp
 +++ b/APMrover2/APMrover2.cpp
-@@ -137,6 +137,11 @@ void Rover::loop()
+@@ -72,6 +72,7 @@ const AP_Scheduler::Task Rover::scheduler_tasks[] PROGMEM = {
+     { SCHED_TASK(compass_accumulate),     1,    900 },
+     { SCHED_TASK(update_notify),          1,    300 },
+     { SCHED_TASK(one_second_loop),       50,   3000 },
++    { SCHED_TASK(satellite_telemetry),   20,  15000 },	 // Note, this is enough to send about 28 bytes, so during transmit overrun is very likely
+ #if FRSKY_TELEM_ENABLED == ENABLED
+     { SCHED_TASK(frsky_telemetry_send),  10,    100 }
+ #endif
+@@ -137,6 +138,11 @@ void Rover::loop()
      scheduler.run(remaining);
  }
  
-+void Rover::maybe_send_satellite_ping(void)
++void Rover::satellite_telemetry(void)
 +{
-+    this->satellite_telemetry.maybe_send_ping();
++    this->m_satellite_telemetry.update();
 +}
 +
  // update AHRS system
  void Rover::ahrs_update()
  {
-@@ -502,6 +507,9 @@ void setup(void)
- }
- void loop(void)
- {
-+    // NOTE: Send satellite update outside of the scheduler becuase it might invoke the scheduler
-+    rover.maybe_send_satellite_ping();
-+
-     rover.loop();
- }
- 

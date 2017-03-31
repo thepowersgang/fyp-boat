@@ -3,6 +3,8 @@
  *
  * Based on the IridiumSBD libray (http://arduiniana.org/libraries/iridiumsbd/) and structured
  * to run within the APM codebase
+ *
+ * Note: The modem used by The UWA EE project is 19200 baud by default.
  */
 #include "UWA_IridiumSBD.h"
 #include <ctype.h>
@@ -12,11 +14,13 @@ extern const AP_HAL::HAL& hal;
 
 UWA_IridiumSBD::UWA_IridiumSBD(AP_HAL::BetterStream& serial, int sleep_pin):
     m_serial(serial),
-    m_sleep_pin(sleep_pin)
+    m_sleep_pin(sleep_pin),
+    
+    m_wait_for_at(serial)
 {
 }
 
-bool UWA_IridiumSBD::do_update()
+bool UWA_IridiumSBD::update()
 {
     switch(m_state)
     {
@@ -322,5 +326,121 @@ void UWA_IridiumSBD::sbdix_wait_retry()
 }
 void UWA_IridiumSBD::sbdix_req()
 {
+}
+
+// --------------------------------------------------------------------
+// Timed waiter
+// --------------------------------------------------------------------
+void UWA_IridiumSBD::TimedWaiter::start(uint32_t us_from_now)
+{
+    m_start_time = hal.scheduler->micros();
+    m_desired_elapsed = us_from_now;
+}
+bool UWA_IridiumSBD::TimedWaiter::update()
+{
+    if( hal.scheduler->micros() - m_start_time >= m_desired_elapsed )
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+// --------------------------------------------------------------------
+// Wait for reply
+// --------------------------------------------------------------------
+bool UWA_IridiumSBD::WaitForAt::init(char* response_buf, size_t response_size, const char* prompt, const char* terminator)
+{
+    if( m_state != State::Idle )
+        return false;
+
+    m_response_buf = response_buf;
+    m_response_buf_size = response_size;
+    m_prompt = prompt;
+    m_terminator = terminator;
+
+    // Only find prompt+response if there's a prompt provided
+    m_state = (prompt ? State::LookingForPrompt : State::LookingForTerminator);
+    m_match_pos = 0;
+    
+    m_op_start_time_ms = hal.scheduler->millis();
+    return true;
+}
+bool UWA_IridiumSBD::WaitForAt::update()
+{
+    switch(m_state)
+    {
+    case State::Idle:
+        break;
+    case State::Error:
+        break;
+    default:
+        if( hal.scheduler->millis() - m_op_start_time_ms > 30*1000 )
+        {
+            m_state = State::Error;
+            return true;
+        }
+        const uint32_t MAX_CYCLE_MS = 10;
+        uint32_t start = hal.scheduler->millis();
+        while( m_serial.available() > 0 && hal.scheduler->millis() - start < MAX_CYCLE_MS )
+        {
+            char c = m_serial.read();
+            switch(m_state)
+            {
+            case State::Idle:   break;
+            case State::Error:  break;
+            case State::LookingForPrompt:
+                if( c == m_prompt[m_match_pos] )
+                {
+                    m_match_pos ++;
+                    if(m_prompt[m_match_pos] == '\0')
+                    {
+                        m_match_pos = 0;
+                        m_state = (m_response_buf_size ? State::GatheringResponse : State::LookingForTerminator);
+                    }
+                }
+                else
+                {
+                    m_match_pos = (c == m_prompt[0] ? 1 : 0);
+                }
+                break;
+            case State::GatheringResponse:
+                if(c == '\r')
+                {
+                    m_state = State::LookingForTerminator;
+                }
+                else
+                {
+                    *m_response_buf++ = c;
+                    m_response_buf_size --;
+                    if(m_response_buf_size == 0)
+                    {
+                        //m_response_overflowed = true;
+                        m_state = State::LookingForTerminator;
+                    }
+                }
+                break;
+            case State::LookingForTerminator:
+                if( c == m_terminator[m_match_pos] )
+                {
+                    m_match_pos ++;
+                    if(m_prompt[m_match_pos] == '\0')
+                    {
+                        m_match_pos = 0;
+                        m_state = State::Idle;
+                        return true;
+                    }
+                }
+                else
+                {
+                    m_match_pos = (c == m_terminator[0] ? 1 : 0);
+                }
+                break;
+            }
+        }
+    }
+    return m_state == State::Idle;
 }
 

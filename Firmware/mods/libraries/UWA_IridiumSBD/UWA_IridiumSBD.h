@@ -57,6 +57,8 @@ private:
 
     class WaitForAt
     {
+        AP_HAL::BetterStream& m_serial;
+
         enum class State
         {
             Idle,
@@ -66,18 +68,25 @@ private:
             LookingForTerminator,
         } m_state = State::Idle;
 
-        uint32_t    m_timeout_end;
+        uint32_t    m_op_start_time_ms = 0;
         
         const char* m_prompt = nullptr;
         const char* m_terminator = nullptr;
+        char* m_response_buf = nullptr;
+        size_t m_response_buf_size = 0;
+
+        size_t m_match_pos = 0;
 
     public:
-        WaitForAt();
+        WaitForAt(AP_HAL::BetterStream& serial):
+            m_serial(serial)
+        {
+        }
         
         bool is_error() const { return m_state == State::Error; };
         void clear_error() { if(is_error()) m_state = State::Idle; }
         bool init(char* response_buf=nullptr, size_t response_size=0, const char* prompt=nullptr, const char* terminator="OK\r\n");
-        int update();
+        bool update();
     } m_wait_for_at;
 
     size_t m_tx_data_size;
@@ -90,7 +99,7 @@ public:
     UWA_IridiumSBD(AP_HAL::BetterStream& port, int sleepPin=-1);
 
     // Returns `true` when in idle state after call
-    bool do_update();
+    bool update();
 
     // Requests that the modem be woken from low-power mode
     // RETURNS `true` if the request was started

@@ -1,5 +1,5 @@
 diff --git a/APMrover2/Rover.h b/APMrover2/Rover.h
-index e2224ea..e0a64c0 100644
+index e2224ea..61c9fae 100644
 --- a/APMrover2/Rover.h
 +++ b/APMrover2/Rover.h
 @@ -93,12 +93,15 @@
@@ -18,23 +18,21 @@ index e2224ea..e0a64c0 100644
  
      Rover(void);
  
-@@ -106,6 +109,10 @@ public:
-     void setup(void);
-     void loop(void);
- 
-+    // BEGIN UWA EE
-+    void maybe_send_satellite_ping(void);
-+    // END UWA EE
-+
- private:
-     AP_HAL::BetterStream* cliSerial;
- 
-@@ -173,6 +180,8 @@ private:
+@@ -173,6 +176,8 @@ private:
      SITL sitl;
  #endif
  
-+    IridiumTelemtry	satellite_telemetry;
++    IridiumTelemtry	m_satellite_telemetry;
 +
      // GCS handling
      AP_SerialManager serial_manager;
      const uint8_t num_gcs;
+@@ -510,6 +515,8 @@ private:
+     bool in_stationary_loiter(void);
+     void set_loiter_active(const AP_Mission::Mission_Command& cmd);
+ 
++    void satellite_telemetry(void);
++
+ public:
+     bool print_log_menu(void);
+     int8_t dump_log(uint8_t argc, const Menu::arg *argv);
