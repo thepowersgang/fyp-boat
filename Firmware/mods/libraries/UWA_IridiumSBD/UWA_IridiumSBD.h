@@ -114,7 +114,7 @@ public:
 
 private:
     void sbdix_get_signal_strength();
-    void sbdix_wait_retry();
+    void sbdix_wait_retry(bool is_signal);
     void sbdix_req();
 
 };

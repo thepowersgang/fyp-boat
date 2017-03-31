@@ -180,7 +180,7 @@ bool UWA_IridiumSBD::update()
             }
             else
             {
-                this->sbdix_wait_retry();
+                this->sbdix_wait_retry(true);
             }
         }
         break;
@@ -226,7 +226,7 @@ bool UWA_IridiumSBD::update()
             }
             else
             {
-                this->sbdix_wait_retry();
+                this->sbdix_wait_retry(false);
             }
         }
         break;
@@ -321,11 +321,23 @@ void UWA_IridiumSBD::sbdix_get_signal_strength()
     m_wait_for_at.init(m_csq_response_buf, sizeof(m_csq_response_buf), "+CSQ:");
     m_state = State::SbdixGetSigWait;
 }
-void UWA_IridiumSBD::sbdix_wait_retry()
+void UWA_IridiumSBD::sbdix_wait_retry(bool is_signal)
 {
+    if(is_signal)
+    {
+        m_timed_waiter.start( 10l*1000*1000 );
+    }
+    else
+    {
+        m_timed_waiter.start( 30l*1000*1000 );
+    }
+    m_state = State::SbdixWaitRetry;
 }
 void UWA_IridiumSBD::sbdix_req()
 {
+    m_serial.print_P(PSTR("AT+SBDIX\r"));
+    m_wait_for_at.init(m_sbdix_response_buf, sizeof(m_sbdix_response_buf), "+SBDIX: ");
+    m_state = State::SbdixWaitRsp;
 }
 
 // --------------------------------------------------------------------
