@@ -1,0 +1,10 @@
+diff --git a/APMrover2/make.inc b/APMrover2/make.inc
+index 04ab0e5..dbb39d2 100644
+--- a/APMrover2/make.inc
++++ b/APMrover2/make.inc
+@@ -52,4 +52,5 @@ LIBRARIES += AP_Notify
+ LIBRARIES += AP_BattMonitor
+ LIBRARIES += AP_OpticalFlow
+ LIBRARIES += AP_Declination
++LIBRARIES += UWA_IridiumSBD
+ 
