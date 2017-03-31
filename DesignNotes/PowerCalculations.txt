@@ -3,11 +3,12 @@ Supply Capacity
 ===============
 
 Supply: 100W solar panel
-- Approximate power ratio is 4Wh per W of panel (for Perth) = 400Wh per day
+- Approximate power ratio is 4Wh per W of panel (for Perth) = `400Wh` per day
  - [https://www.solarchoice.net.au/blog/how-much-energy-will-my-solar-cells-produce/](Source)
-- Halve to have charging capacity for cloudy days. = 200Wh per day
-- Divide by 24 hours to get the max constant drain = 8.3W
-- Subtract peak control drain of ???mW = 
+- Halve to have charging capacity for cloudy days. = `200Wh` per day
+- Divide by 24 hours to get the max constant drain = `8.3W`
+- Subtract peak control drain of 600mW (See bellow) = `7.7W`
+- Distribute between two motors = `3.8W`
 
 
 Control Electronics
@@ -15,8 +16,38 @@ Control Electronics
 
 APM Board
 ---------
-- ATMega641 : 15mA + io currents
-- ATMega32U2 : 21mA + io
-- 
+
+Peak current draw for major chips
+- (Main CPU) ATMega641 : 15mA + io currents
+- (USB CPU) ATMega32U2 : 21mA + io
+- (DataFlash) AT45DB161D : 17mA
+- (Accelerometer) MPU-6000 : 3.6mA (with all units enabled)
+- (Altimiter) MS5611-01BA : 1.4mA (absolute peak)
+Total: 58mA
+
+Regulation Overhead
+- NOTE: Regulator is limited to 100mA continious output, so 330mW max drain from APM board
+- Linear regulator, so leads to board looking like a 5V supply at 3.3V current
+
+Total Power: ~300mW peak
+
+
+Side-Units
+---------
+
+- GPS Module: ~30mA
+- Satellite Modem: 450mA peak (during operation, not constant)
+ - Assuming active for two mins per hour = 1/30 usage on average
+ - 15mA usage.
+- Data Logger: 6mA max
+
+Total Power:
+- 51mA
+- 255mW
+
+
+Control Total
+---------
+- ~600mW
 
 
