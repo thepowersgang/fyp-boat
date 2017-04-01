@@ -9,6 +9,7 @@
 \begin{itemize}
 \item{Size} Approximately 1.5m by 1m
 \item Fully self-sufficient
+\item Two-motor drive (for mechanical simplicity)
 \end{itemize}
 
 %
@@ -74,6 +75,7 @@ $$
 \paragraph{Battery}
 Any 40A-hr 12V lead-acid battery will work, but using two batteries may be desirable to ensure a sane weight distribution.
 
+\textbf{Options}
 \begin{itemize}
 \item{2x 12V 18Ah SLA Battery} 
 Total capacity 36Ah, distributed across both hulls
@@ -108,25 +110,42 @@ Price: \$52.75 (incl. shipping)
 
 \paragraph{Propulsion}
 Still undecided, several options. We have a capacity of approximately 10W across both motors, this means that each will run at ~5W constant, spiking up to 10W each (when at max turn)
+
+\textbf{Options}
 \begin{itemize}
-\item{Blue Robotics - T100 thruster}
+\item{Blue Robotics - T100 thruster} \\
  Rated to 130W max draw, but max efficiency is at ~6W draw.
  Price: \$144USD (plus shipping of 35USD) per motor = \$431AUD
-\item{Custom build - Motor in hull}
+\item{Custom build - Motor in hull} \\
  Complex due to sealing requirements, but very easy to tailor to our needs (and minimum impact on hydrodynamics)
  \begin{itemize}
- \item{Prop} 50mm diameter, 3 blade prop - \url{https://hobbyking.com/en_us/boats/propellers/3-blade.html} Price: AU\$42 ea.
- \item{Motor} ??
- \item{Motor Controller} 10A 5-25V Dual Channel DC Motor Driver - \url{http://www.robotshop.com/en/10a-5-30v-dual-channel-dc-motor-driver.html} Price: AU\$30 (TODO: Shipping)
+ \item{Prop} 50mm diameter, 3 blade prop \\
+  \url{https://hobbyking.com/en_us/50mm-3-blade-aluminum-cnc-boat-prop-p1-4-3x3.html}\\
+   Price: AU\$42 ea.
+ \item{Motor} 12V Brushless w/ ESC \\
+  \url{https://littlebirdelectronics.com.au/products/brushless-dc-motor-with-encoder-12v-159rpm}\\
+  Price: AU\$42.90 ea
+ \item{Shaft} ??? (Custom?)
  \end{itemize}
-\item{Custom build - Motor outside hull}
+\item{Custom build - Motor outside hull} \\
  Simpler than in-hull, but requires making a streamlined enclosure/mounting
  \begin{itemize}
- \item{Prop} 50mm diameter, 3 blade prop - \url{https://hobbyking.com/en_us/boats/propellers/3-blade.html} Price: AU\$42 ea.
- \item{Motor} ??
- \item{Motor Controller} 10A 5-25V Dual Channel DC Motor Driver - \url{http://www.robotshop.com/en/10a-5-30v-dual-channel-dc-motor-driver.html} Price: AU\$30 (TODO: Shipping)
+ \item{Prop} \\
+  50mm diameter, 3 blade prop \\
+  \url{https://hobbyking.com/en_us/boats/propellers/3-blade.html}\\
+  Price: AU\$42 ea.
+ \item{Motor} \\
+  12V Bilge Pump \\
+  \url{http://www.bcf.com.au/Product/TMC-Submersible-Pump-Mini-12V/116270} \\
+  Price: AU\$25 ea
+ \item{Motor Controller} \\
+  10A 5-25V Dual Channel DC Motor Driver \\
+  \url{http://www.robotshop.com/en/10a-5-30v-dual-channel-dc-motor-driver.html}\\
+  Price: AU\$30 (TODO: Shipping)
+ \item{Shaft} ??? (Custom?)
  \end{itemize}
-\item{Low-power water pumps}
+ \emph{Note: The bilge pump could also be used just as a pump thruster}
+\item{Low-power water pumps} \\
  Relatively simple to set up, but ability to moderate output is unknown. Can place in-hull with two hoses (complex, but smooth), or external (more drag, simpler build).
 \end{itemize}
 
