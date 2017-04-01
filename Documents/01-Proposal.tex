@@ -43,6 +43,22 @@ $$
 E_{\text{storage}} = 11W \times 36\text{hrs} \approx 400\text{W-h} = 33\text{A-hr at 12V}
 $$
 
+\paragraph{Control Drain}
+The control logic (ArduPilot, GPS, logger, modem) have a constant drain that must be accounted for before the driving capacity is determined. A rough figure can be calculated by taking the peak current draw of each unit and converting that to drawn power.
+\begin{itemize}
+\item{ArduPilot} 203mW (calcualted by summing peak current of all major chips and multiplying by 3.5V)
+\item{GPS} 105mW (peak, during active tracking)
+\item{Data Logger} 21mW (during write)
+\item{Satellite Modem} 75mW average (450mA peak, but only for approximately 2 mins per hour, and supply is 5V)
+\end{itemize}
+The above equals a total draw of 404mW
+
+\paragraph{Driving Drain}
+The design calls for two motors (avoids complexities of a rudder), so after subtracting the control draw, the avaliable power must be split between both motors.
+$$
+P_{\text{motor}} = \left(11W - 0.5W\right) / 2 = 5.25W
+$$
+
 \subsection{Existing Parts}
 
 \paragraph{Controller: ArduPilot2.8 Controller Board}
@@ -56,13 +72,59 @@ Any 40A-hr 12V lead-acid battery will work, but using two batteries may be desir
 
 \begin{itemize}
 \item{2x 12V 18Ah SLA Battery} 
+Total capacity 36Ah, distributed across both hulls
 \url{https://www.jaycar.com.au/12v-18ah-sla-battery/p/SB2490}
+Price: \$80AUD (plus shipping)
+
+\item{1x Centry NS40ZLS}
+Single unit, 40Ah capacity. Could be stored in the keel 
+\url{http://www.batteriesdirect.com.au/shop/product/4424/ns40zlsmf.html}
+Price: \$95AUD (TODO: Shipping)
 \end{itemize}
 
 \paragraph{Solar Panel}
 100W/12V solar panel, 1580mm by 808mm size. 
 
 \url{https://pethomeoutdoor.com.au/products/12v-200w-solar-panel-kit-home-generator-caravan-camping-power-mono-charging-pwm}
+Price: \$212AU (TODO: Shipping)
+
+\paragraph{Low-Voltage Supply}
+\emph{Simple DC-DC converter to turn 12V battery/panel supply into ~3.5V for boards to regulate down to 3.3V.}
+
+\paragraph{GPS}
+\emph{Any TTL-based gps would work}
+"Adafruit Ultimate GPS Breakout"
+\url{https://core-electronics.com.au/adafruit-ultimate-gps-breakout-66-channel-w-10-hz-updates-version-3.html}
+Price: \$70AU (incl. shipping)
+
+\paragraph{Data Logger}
+"SparkFun OpenLog"
+\url{https://www.sparkfun.com/products/13712}
+Price: \$52.75 (incl. shipping)
+
+\paragraph{Propulsion}
+Still undecided, several options. We have a capacity of approximately 10W across both motors, this means that each will run at ~5W constant, spiking up to 10W each (when at max turn)
+\begin{itemize}
+\item{Blue Robotics - T100 thruster}
+ Rated to 130W max draw, but max efficiency is at ~6W draw.
+ Price: \$144USD (plus shipping of 35USD) per motor = \$431AUD
+\item{Custom build - Motor in hull}
+ Complex due to sealing requirements, but very easy to tailor to our needs (and minimum impact on hydrodynamics)
+ \begin{itemize}
+ \item{Prop} 50mm diameter, 3 blade prop - \url{https://hobbyking.com/en_us/boats/propellers/3-blade.html} Price: AU\$42 ea.
+ \item{Motor} ??
+ \item{Motor Controller} 10A 5-25V Dual Channel DC Motor Driver - \url{http://www.robotshop.com/en/10a-5-30v-dual-channel-dc-motor-driver.html} Price: AU\$30 (TODO: Shipping)
+ \end{itemize}
+\item{Custom build - Motor outside hull}
+ Simpler than in-hull, but requires making a streamlined enclosure/mounting
+ \begin{itemize}
+ \item{Prop} 50mm diameter, 3 blade prop - \url{https://hobbyking.com/en_us/boats/propellers/3-blade.html} Price: AU\$42 ea.
+ \item{Motor} ??
+ \item{Motor Controller} 10A 5-25V Dual Channel DC Motor Driver - \url{http://www.robotshop.com/en/10a-5-30v-dual-channel-dc-motor-driver.html} Price: AU\$30 (TODO: Shipping)
+ \end{itemize}
+\item{Low-power water pumps}
+ Relatively simple to set up, but ability to moderate output is unknown. Can place in-hull with two hoses (complex, but smooth), or external (more drag, simpler build).
+\end{itemize}
 
 \section{Firmware}
 Firmware will be the \texttt{APMrover2} configuration of the open-source ArduPilot suite. However, to support telemetry updates via the Satellite modem, there will need to changes to the stock firmware.
