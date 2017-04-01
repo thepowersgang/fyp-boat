@@ -1,5 +1,9 @@
 \input{template.tex}
+\title{Autonomous Boat - Design Proposal}
+\author{John Hodge 2051820 \\ Shinji Okumura ??????}
+\date{1 Apr 2017}
 \begin{document}
+\maketitle
 
 \section{Requirements}
 \begin{itemize}
@@ -17,28 +21,28 @@
 %
 % JOHN
 %
-\section{Electonics}
+\section{Electronics}
 
 \subsection{Requirements}
 
 \begin{itemize}
 \item 100W solar supply
 \item Survive a whole day with no solar generation
-\item Able to drive continiously
+\item Able to drive continuously
 \item Routine telemetry updates via Satellite modem
 \end{itemize}
 
 \paragraph{Generation Capacity}
-Main power is to be supplied by a ~1.5x1m solar panel (see below), this size of panel is rated to about 100W generation capacity. In Perth, there's an approximate factor of 4.3 to go from a panel's rated power output to the daily generation capacity (in W-h), however this factor is calcualted based on using an optimal panel angle. Since the panel will be (on average) flat, the factor will be reduced to about 85\% \ref{solarcalc_angle}.
+Main power is to be supplied by a ~1.5x1m solar panel (see below), this size of panel is rated to about 100W generation capacity. In Perth, there's an approximate factor of 4.3 to go from a panel's rated power output to the daily generation capacity (in W-h), however this factor is calculated based on using an optimal panel angle. Since the panel will be (on average) flat, the factor will be reduced to about 85\% \ref{solarcalc_angle}.
 
-This avaliable generation capacity must be sufficient to both power the boat during the day, and provide charging for during the night (and cloudy days). This requires that a minium of 50\% of the supply power must be reserved for charging (and ideally up to 70\% to account for losses and recharging after cloudy days).
+This available generation capacity must be sufficient to both power the boat during the day, and provide charging for during the night (and cloudy days). This requires that a minimum of 50\% of the supply power must be reserved for charging (and ideally up to 70\% to account for losses and recharging after cloudy days).
 
 $$
 P_{\text{cont}} = 100 \times 4.3 \times 0.88 \times 0.70 \div 24 \approx 11W
 $$
 
 \paragraph{Power Storage}
-To be able to continue to run at full capacity in the absense of solar generation for a whole day, we need storage equivalent to 36 hours of continual drain.
+To be able to continue to run at full capacity in the absence of solar generation for a whole day, we need storage equivalent to 36 hours of continual drain.
 $$
 E_{\text{storage}} = 11W \times 36\text{hrs} \approx 400\text{W-h} = 33\text{A-hr at 12V}
 $$
@@ -46,7 +50,7 @@ $$
 \paragraph{Control Drain}
 The control logic (ArduPilot, GPS, logger, modem) have a constant drain that must be accounted for before the driving capacity is determined. A rough figure can be calculated by taking the peak current draw of each unit and converting that to drawn power.
 \begin{itemize}
-\item{ArduPilot} 203mW (calcualted by summing peak current of all major chips and multiplying by 3.5V)
+\item{ArduPilot} 203mW (calculated by summing peak current of all major chips and multiplying by 3.5V)
 \item{GPS} 105mW (peak, during active tracking)
 \item{Data Logger} 21mW (during write)
 \item{Satellite Modem} 75mW average (450mA peak, but only for approximately 2 mins per hour, and supply is 5V)
@@ -54,7 +58,7 @@ The control logic (ArduPilot, GPS, logger, modem) have a constant drain that mus
 The above equals a total draw of 404mW
 
 \paragraph{Driving Drain}
-The design calls for two motors (avoids complexities of a rudder), so after subtracting the control draw, the avaliable power must be split between both motors.
+The design calls for two motors (avoids complexities of a rudder), so after subtracting the control draw, the available power must be split between both motors.
 $$
 P_{\text{motor}} = \left(11W - 0.5W\right) / 2 = 5.25W
 $$

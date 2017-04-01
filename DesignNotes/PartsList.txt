@@ -79,6 +79,7 @@ Sattelite Modem
  - Connectors:
   - UART/RS232 connection
   - 8-32V input
+ - [http://www.g-layer.com.au/wp-content/uploads/IRDM_9602DeveloperGuideV4_DEVGUIDE_Sep2012.pdf](Modem Manual)
 
 Data Logger
 ------------
