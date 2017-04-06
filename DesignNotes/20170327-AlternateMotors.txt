@@ -10,11 +10,14 @@ Extras
 
 Propeller
 ---------
+- 57mm diameter, 3 blade prop (2x) - [https://hobbyking.com/en_us/3-blade-boat-propellers-40x57mm-2pcs-bag.html](Link)
+ - Plastic
+ - Price: $2.23 per pair
 
 Options
 =======
 
-CDM - DC Brushless Motor for Fanner, 12V 6000rpm No Load, 4W Output Powe
+CDM - DC Brushless Motor for Fanner, 12V 6000rpm No Load, 4W Output Power
 ------
 - "CDM" CDM-BL3626I-T1201
 - [http://www.globalsources.com/si/AS/Dongguan-Country/6008849101954/pdtl/DC-Brushless-Motor/1123731124.htm?AGGType=pure](Store link)
@@ -31,6 +34,40 @@ Brushless DC Motor with Encoder 12V 159RPM
  - PWM speed control
  - Direction control
  - Feedback pulse output
+
+OpenROV motors
+--------------
+- [https://store.openrov.com/collections/2-8-replacement-parts/products/motor-set](Store Link)
+ - [https://hobbyking.com/en_us/turnigy-aerodrive-dst-700-brushless-outrunner-motor-700kv.html](Direct motor link)
+ - Possible - [https://forum.openrov.com/t/dst-700-motors-for-salt-water-mark-motors-part-3/1942/6](Waterproofing patch)
+- Brushless DC motors with insulation changes
+- Require silicon lubricant to prevent corrosion in salt water.
+- Max power: 140W
+ - NOTE: This is higher than the BlueRobotics motors (at 130W)
+- No-load power: 7.2W
+
+Submersible Pump (Bilge Pump)
+--------------
+- Suggested by [http://www.instructables.com/id/How-to-build-a-thruster-for-a-homemade-submersible/?ALLSTEPS](Instructables)
+- Uses a 4160 l/hr pump (1.2l/sec)
+ - [http://www.bcf.com.au/Product/Rule-Bilge-Pumps/124209](Store Link)
+ - 3.3A max draw - ~40W
+- (+) Already watertight (well, can handle being underwater)
+- (-) Possibly unable to go backwards? (Not sure if the motor is capable of running in reverse)
+
+Decision
+========
+
+Easiest: Bilge Pump
+------------------
+The easiest option here is using a small bilge pump. These are designed to be submerged un seawater, and have been shown to work as thrusters. The only downside of taking one of these is that it is unknown if they can be run backwards (very quick investigations say no).
+The other risk here is that these motors may not be very easy to regulate (with the only regulation option being avaliable power, no speed feedback).
+
+The lack of reverse may not be an issue, assuming we do not need to do precise station keeping (or have to do a standing/sharp turn)
+
+Second: OpenROV motors
+---------------------
+The OpenROV motors are not sealed, so they will either need to be treated to withstand constant immersion in a saline enviroment, or we hope that constant immersion won't cause issues. These have the large upside of being fully regulatable DC motors (so they can be reversed and have a controllable speed). The problem here is that our constant driving power is quite a bit below their max power rating (and is around their zero-load power drain).
 
 
 
