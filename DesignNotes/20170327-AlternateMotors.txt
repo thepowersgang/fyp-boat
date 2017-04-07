@@ -13,6 +13,7 @@ Propeller
 - 57mm diameter, 3 blade prop (2x) - [https://hobbyking.com/en_us/3-blade-boat-propellers-40x57mm-2pcs-bag.html](Link)
  - Plastic
  - Price: $2.23 per pair
+- NOTE: 4.8mm (3/16") shaft hole
 
 Options
 =======
@@ -34,6 +35,10 @@ Brushless DC Motor with Encoder 12V 159RPM
  - PWM speed control
  - Direction control
  - Feedback pulse output
+- NOTE: Will likely require a shaft seal to keep the motor inside and dry.
+ - Shaft extension: 
+ - Shaft seal: [http://www.sealingaustralia.com.au/v-rings/](3.5mm seal)
+ - Plug: ? (must be about 1cm diameter to fit the above seal)
 
 OpenROV motors
 --------------
@@ -54,6 +59,7 @@ Submersible Pump (Bilge Pump)
  - 3.3A max draw - ~40W
 - (+) Already watertight (well, can handle being underwater)
 - (-) Possibly unable to go backwards? (Not sure if the motor is capable of running in reverse)
+- [http://store.waterpumpsupply.com/runo12vodcbi.html](Extra stats)
 
 Decision
 ========
@@ -68,6 +74,53 @@ The lack of reverse may not be an issue, assuming we do not need to do precise s
 Second: OpenROV motors
 ---------------------
 The OpenROV motors are not sealed, so they will either need to be treated to withstand constant immersion in a saline enviroment, or we hope that constant immersion won't cause issues. These have the large upside of being fully regulatable DC motors (so they can be reversed and have a controllable speed). The problem here is that our constant driving power is quite a bit below their max power rating (and is around their zero-load power drain).
+
+Third: Just use a BlueRobotics thruster
+-------------------
+Since the OpenROV motors are so overpowered (compared to our power capacity), we could just got for the BlueRobotics thrusters (already used on one of the AUVs), and run them at the peak efficiency point.
+
+Fourth: Internal motor connected via a shaft seal
+--------------------------
+Complex, but allows using a fully-featured and well-sized motor without caring about getting it wet. Problem may be finding a suitably sized seal for the motor shaft. (Shrink-wrap spacers could be used to pad out the shaft so it fits the seal, or a larger shaft could be attached).
+
+
+Calculations
+============
+
+Thrust
+------
+
+Most recent drag calculation is _41N_ (at an unknown velocity, likely 1.3m/s)
+
+Effective thrust is calculated by multiplying the shaft RPM by the advance of the propellor (and reducing to account for compression, rotation, and edge losses)
+- Prop advance: 18mm run, ~110 degrees, ~25mm blade length (assume flat, it isn't)
+ - Pitch is the distance the prop would move if the fluid were non-compressable
+ - P ~= C / W * L => P = 360 / 110 * 18mm = ~58mm pitch
+ - P * Area of blades ~= volume of moved water
+ - `58mm * (2 * pi * 57^2 - 2 * pi * 6^2)` (6mm hub assumed)
+  - `1.17e6` mm^3 per revolution (1.171 l/rev)
+
+### DST-700 (OpenRov)
+- Test data from [https://hobbyking.com/en_us/turnigy-aerodrive-dst-700-brushless-outrunner-motor-700kv.html](HobbyKing)
+ - 0.82kgf (8N) thrust at 130W
+ - Assume linear (bad assumption), max thrust at ~5W draw would be 0.31N
+
+### BlueRobotics
+- T200 has peak efficiency at 1570us, 0.51lbf (2.26N) thrust at 5.51W draw.
+ - Required draw for overcoming above drag is 79W ea (1770us)
+
+### FIT0441
+- 159RPM, using above calc that's about 186l/min moved at max speed (assuming no slip and no loss)
+ - 
+
+### Bilge Pump ("Rule" 25D)
+- Numbers from [http://store.waterpumpsupply.com/runo12vodcbi.html](Extra stats)
+ - 6.7' head height can deliver 180GPH at 12V
+ - 2.04m at 0.19l/s
+ - 2.04m of water assuming the pipe diameter constant at 1.9cm gives a volume of 4.6 liters (~4.6 kg)
+ - 4.6kgf (45N) at max power 1.9A/12V
+ - Assuming linear relation of power to thrust, at ~5W we'd get 9.8N thrust per motor
+
 
 
 
