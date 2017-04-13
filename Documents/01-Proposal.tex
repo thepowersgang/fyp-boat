@@ -39,7 +39,7 @@ Main power is to be supplied by a ~1.5x1m solar panel (see below), this size of 
 This available generation capacity must be sufficient to both power the boat during the day, and provide charging for during the night (and cloudy days). This requires that a minimum of 50\% of the supply power must be reserved for charging (and ideally up to 70\% to account for losses and recharging after cloudy days).
 
 $$
-P_{\text{cont}} = 100 \times 4.3 \times 0.88 \times 0.70 \div 24 \approx 11W
+P_{\text{cont}} = 100 \times 4.3 \times 0.88 \times (1.0 - 0.70) \div 24 \approx 4.7W
 $$
 
 \paragraph{Power Storage}
@@ -61,7 +61,7 @@ The above equals a total draw of 404mW
 \paragraph{Driving Drain}
 The design calls for two motors (avoids complexities of a rudder), so after subtracting the control draw, the available power must be split between both motors.
 $$
-P_{\text{motor}} = \left(11W - 0.5W\right) / 2 = 5.25W
+P_{\text{motor}} = \left(4.7W - 0.5W\right) / 2 = 2.1W
 $$
 
 \subsection{Existing Parts}

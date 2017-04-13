@@ -26,7 +26,8 @@ all: $(BIN)
 $(BIN): ardupilot-source/APMrover2/APMrover2.elf
 
 ardupilot-source/APMrover2/APMrover2.elf: ardupilot-source/APMrover2/Makefile $(PATCHED_FILES) $(NEW_FILES)
-	$(MAKE) -C $(dir $@) apm2
+	mkdir -p builddir
+	BUILDROOT=$(abspath builddir/) $(MAKE) -C $(dir $@) apm2
 
 init:
 	-git clone https://github.com/ArduPilot/ardupilot.git ardupilot-source

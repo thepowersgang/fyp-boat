@@ -4,9 +4,18 @@ Requirements
 - 12V input
 - Max 4W power consuption
 
+Notes
+=====
+
+- `Kv` - RPM per Volt at no load
 
 Extras
 =====
+
+Shaft
+-----
+- OPTION - [https://hobbyking.com/en_us/4mm-drive-shaft-and-prop-set.html](HobbyKing)
+
 
 Propeller
 ---------
@@ -14,6 +23,7 @@ Propeller
  - Plastic
  - Price: $2.23 per pair
 - NOTE: 4.8mm (3/16") shaft hole
+- Pitch is ~58mm (inferred), requires ~1000rpm motor to meet 1m/s
 
 Options
 =======
@@ -40,6 +50,8 @@ Brushless DC Motor with Encoder 12V 159RPM
  - Shaft seal: [http://www.sealingaustralia.com.au/v-rings/](3.5mm seal)
  - Plug: ? (must be about 1cm diameter to fit the above seal)
 
+- PROBLEM: 159 RPM is far too slow for our needs. Need about 500RPM to meet 1m/s with most small props
+
 OpenROV motors
 --------------
 - [https://store.openrov.com/collections/2-8-replacement-parts/products/motor-set](Store Link)
@@ -60,6 +72,27 @@ Submersible Pump (Bilge Pump)
 - (+) Already watertight (well, can handle being underwater)
 - (-) Possibly unable to go backwards? (Not sure if the motor is capable of running in reverse)
 - [http://store.waterpumpsupply.com/runo12vodcbi.html](Extra stats)
+
+
+Internal Motor
+-------------
+- Motor [https://hobbyking.com/en_us/turnigy-xk3674-1400kv-brushless-inrunner.html](HobbyKing)
+- Gearbox [https://hobbyking.com/en_us/gear-box-1-5mm-10t-64t.html](HobbyKing)
+
+Water Feature Pump
+-----------------
+- [https://www.bunnings.com.au/aquapro-low-voltage-water-feature-pump_p2810056](Bunnings)
+- "Thrust" - 750l/h at 1.5m head
+
+
+Electic Outboard
+-------------------
+- [http://www.bcf.com.au/Product/Watersnake-Electric-Motor-Transom-Mount-18lb/165724](BCF)
+ - AU$169
+- 18lbf (8.1kgf / ~85N) peak thrust
+- 12V with 15A max draw (unit has two settings, 15A and 7A)
+ - [https://www.jarviswalker.com.au/catalogue/boating/watersnake-motors/transom-mount-electric-motors/watersnake-kayak-motor-bracket-combo.html](Manufacturer?)
+ - 180W peak, 84W for low power mode
 
 Decision
 ========
@@ -99,6 +132,19 @@ Effective thrust is calculated by multiplying the shaft RPM by the advance of th
  - P * Area of blades ~= volume of moved water
  - `58mm * (2 * pi * 57^2 - 2 * pi * 6^2)` (6mm hub assumed)
   - `1.17e6` mm^3 per revolution (1.171 l/rev)
+ - Water is moved at a speed of `RPM / 60 * Pitch`
+ - Force comes from the difference between intake and exhaust velocities
+ - A ballpark time (for acceleration and hence force) can be obtained by assuming a mean velocity of `(V_{in} + V_{out}) / 2`
+
+
+- `V_{out} = RPM / 60 * 58mm`
+- `deltaV = V_{out} - V_{in}`
+- `time = 58mm / (V_{in}/2 + deltaV/2)`
+- `accel = deltaV / time`
+ - `accel = (V_{out} - V_{in}) / ( 58mm / (V_{in}/2 + V_{out}/2) )`
+ - `accel = (V_{out} - V_{in}) * (V_{in}/2 + V_{out}/ 2) / 58mm`
+ - `accel = (V_{out}^2 - V_{in}^2) / (2 * 58mm)`
+- `force = 1.171kg * accel`
 
 ### DST-700 (OpenRov)
 - Test data from [https://hobbyking.com/en_us/turnigy-aerodrive-dst-700-brushless-outrunner-motor-700kv.html](HobbyKing)
@@ -111,7 +157,7 @@ Effective thrust is calculated by multiplying the shaft RPM by the advance of th
 
 ### FIT0441
 - 159RPM, using above calc that's about 186l/min moved at max speed (assuming no slip and no loss)
- - 
+ - Static thrust (`V_{in}=0`) with 58mm pitch prop is approximately 0.25N
 
 ### Bilge Pump ("Rule" 25D)
 - Numbers from [http://store.waterpumpsupply.com/runo12vodcbi.html](Extra stats)
