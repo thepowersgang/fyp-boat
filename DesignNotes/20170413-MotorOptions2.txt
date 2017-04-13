@@ -1,0 +1,43 @@
+
+DC Pump
+-------
+(Will be placed in-hull with tubes)
+
+- [http://www.ebay.com.au/itm/12V-DC-Solar-Power-Submersible-Fountain-Pond-Pool-Brushless-Water-Pump-Aquarium-/331853340983?_trksid=p2385738.m2548.l4275](Possibility)
+ - 750LPH, 3M head
+ - ~10W max draw
+ - Absolute max speed controlled by nozzle diameter, 8mm = ~1m/s
+
+
+BlueRobotics Thruster
+--------------------
+[http://bluerobotics.com/store/thrusters/t100-thruster/](BlueRobotics T100)
+- Max 350W, max 3.55kgf thrust
+- Absolute max speed = 2.5m/s
+
+OpenROV (current)
+---------
+[https://docs.google.com/spreadsheets/d/1DdteDlJqQQ5VRS-0wDRqXkb3rrWe9QZ-iHLwQIVYGBA/edit#gid=4](OpenROV BOMs 2.3 -> 2.8)
+
+- v2.8 (current)
+ - DST-700 brushless DC motors
+  - [https://hobbyking.com/en_us/turnigy-aerodrive-dst-700-brushless-outrunner-motor-700kv.html](HobbyKing link)
+  - 700KV, 140W max (max 11A / 14.4V)
+ - Graupner 2308.60 Propeller (from v2.5 onwards)
+  - [http://www.cornwallmodelboats.co.uk/acatalog/graupner_propellers.html](Prop)
+  - 32mm pitch, 60mm diameter
+  - Note: Requires >1875 rpm to reach 1m/s (ideally allow 2500rpm)
+- v2.4 (28/May/2013)
+ - 2213N 800Kv Motor
+  - [https://hobbyking.com/en_us/2213n-800kv-brushless-motor.html](HobbyKing)
+  - 800Kv
+  - PROBLEM: Max voltage is 11V, our supply is 12
+ - 5-blade Delta-V 15 Propeller
+  - [http://www.e-fliterc.com/Products/Default.aspx?ProdID=EFLDF151](E-flite)
+  - Unknown pitch, hence unknown RPM for max speed.
+
+
+<!-- vim: ft=markdown
+-->
+
+

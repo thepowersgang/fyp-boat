@@ -161,12 +161,20 @@ Effective thrust is calculated by multiplying the shaft RPM by the advance of th
 
 ### Bilge Pump ("Rule" 25D)
 - Numbers from [http://store.waterpumpsupply.com/runo12vodcbi.html](Extra stats)
- - 6.7' head height can deliver 180GPH at 12V
+ - 6.7' head height can deliver 180GPH at 12V (680LPH)
  - 2.04m at 0.19l/s
  - 2.04m of water assuming the pipe diameter constant at 1.9cm gives a volume of 4.6 liters (~4.6 kg)
  - 4.6kgf (45N) at max power 1.9A/12V
  - Assuming linear relation of power to thrust, at ~5W we'd get 9.8N thrust per motor
 
+### Water pump
+- Obtain exhaust speed from output diameter and flow rate.
+ - `v = rate / output_area`
+- E.g. 750LPH pump pushing a 20mm tube
+ - `v = ( 750 / 1000 / 3600 ) / (pi * 0.02^2)` (working in meters and seconds)
+ - `v = 0.165... m/s`
+
+- TODO: Head height vs avaliable force.
 
 
 
