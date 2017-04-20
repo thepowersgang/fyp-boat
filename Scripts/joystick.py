@@ -37,7 +37,7 @@ class Joystick(object):
 		buf = array.array('B', [0])
 		fcntl.ioctl(self._fd, JSIOCGBUTTONS, buf)
 		count = buf[0]
-		buf = array.array('B', [0] * 200)	# NOTE: Is this a definition in the kernel?
+		buf = array.array('H', [0] * 200)	# NOTE: Is this a definition in the kernel?
 		fcntl.ioctl(self._fd, JSIOCGBTNMAP, buf)
 		self._buttons = []	# Array of button definitions (with previous values)
 		self._buttons_map = {}	# Name->Index map
