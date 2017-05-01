@@ -45,9 +45,18 @@ Total Power:
 - 51mA
 - 255mW
 
+3G Modem
+-------
+Measurements taken with USB, 5V
+- 43mA idle
+- 130mA at boot
+- USB 500mA peak
+
 
 Control Total
 ---------
 - ~600mW
 
+<!-- vim: ft=markdown
+-->
 

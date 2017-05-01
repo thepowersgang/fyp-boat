@@ -1,0 +1,67 @@
+## Solar Panel
+[http://www.ebay.com.au/itm/Higp%C2%ADPower%C2%AD150W%C2%AD12V%C2%ADMono%C2%ADBendable%C2%ADSemi%C2%ADflexible%C2%ADSolar%C2%ADPanel%C2%ADfor%C2%ADCar%C2%ADRV%C2%ADBoat%C2%ADTent%C2%AD/132017117168?hash=item1ebcd557f0:g:YY4AAOSwal5YCcMT](EBay)
+
+## Battery Charger
+[http://www.ebay.com.au/itm/30A%C2%ADMPPT%C2%ADWaterproof%C2%ADSolar%C2%ADBattery%C2%ADCharge%C2%ADController%C2%ADwith%C2%AD5%C2%ADpair%C2%ADMC4%C2%ADConnector%C2%ADFB%C2%AD/172343909750?hash=item28207f5d76:g:O94AAOSw8w1X25G4](EBay)
+## Battery monitor? (reporting battery level to the APM)
+- Would need to be integrated with the charger? OR - Use a voltage divider to take 12V down to 3V and directly monitor the battery line voltage.
+- Not really possible. Maybe look into patching into the charger, or use active times.
+- Rough voltage monitor on the battery? Voltage divider?
+  - See `00a-BatteryCharge.md`
+
+## Batteries!
+Already avaliable, will use 4x 12V SLAs
+
+## Thrusters/Bracket
+- [http://bluerobotics.com/store/thrusters/t100-thruster/](Thrusters - BlueRobotics)
+  - Remember to include ESC
+- [https://www.bluerobotics.com/store/thrusters/t100-p-bracket-r1/](Brackets - BlueRobotics)
+
+## RS232->TTL bridge
+[https://www.ebay.com.au/p/?iid=262728237318&&&chn=ps](EBay)
+
+## 5/3.3V Regulator
+[https://www.buyraspberrypi.com.au/shop/12-volt-to-5-volt-3000ma-step-down-transformer/](Link)
+- 5V is a good voltage, but going down to ~3 would be more efficient.
+- 5 does allow us to run the modem off a lower voltage.
+
+## Connectors
+### APM Serial 2: 1.25mm 4pin plug
+[https://www.digikey.com/product-detail/en/hirose-electric-co-ltd/DF13-4S-1.25C/H2181-ND/241750](DigiKey)
+[http://au.rs-online.com/web/p/pcb-connector-housings/0143009/](RS Electronics)
+### APM Power: 1.25mm 6pin plug
+[https://www.digikey.com/product-detail/en/hirose-electric-co-ltd/DF13-6S-1.25C/H2183-ND/241753](DigiKey)
+[http://au.rs-online.com/web/p/pcb-connector-housings/0143021/](RS Electronics)
+### Contacts for the above
+[http://au.rs-online.com/web/p/pcb-connector-contacts/5038325/](RS Electronics)
+### Modem Power: 2.1mm center positive barrel plug
+TODO. Need the exact measurements of the plug.
+- 5.5mm outer circumference, ~2mm pin
+- 5.5mm,2.1mm plugs exist.
+ [http://au.rs-online.com/web/p/dc-power-plugs/8840950/](RS Electronics)
+
+### Wires
+- 2x Modem power (Standard power guage)
+- 2x APM power input (Small guage, suitable for 1.25mm)
+ - Measured to be 1mm incl insulation
+ - 26AWG is the smallest altronics have, and the largest suitable for the plugs.
+- 4x TTL serial (Same as above, connect to standard pins)
+- 2x 3+2 ESC extensions. (???)
+  - Just need to extend the control lines.
+- Power distribution. (Large-ish guage, as it's 12V and maybe 1A)
+  - Pre-made 12V cable can work nicely. (Black w/ white stripe cable)
+
+NOTE: These should be avaliable from altronics with minimal fuss, so are not cruicial to order early
+- [http://www.altronics.com.au/cable/hookup-non-shielded/?prdv=26AWG](Altronics - 26AWG) - $.30/m
+- [http://www.altronics.com.au/cable/hookup-non-shielded/?prdv=13AWG](Altronics - 13AWG) - $2.05/m
+
+Length:
+- Short runs to 5V PSU (10cm each max?)
+- Long-ish runs to the ESCs (one in each hull)
+- Long runs for power (About four 700mm-800mm runs)
+
+
+
+
+<!-- vim: ft=markdown
+-->
