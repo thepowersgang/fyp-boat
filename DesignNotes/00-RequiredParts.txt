@@ -54,11 +54,20 @@ TODO. Need the exact measurements of the plug.
 NOTE: These should be avaliable from altronics with minimal fuss, so are not cruicial to order early
 - [http://www.altronics.com.au/cable/hookup-non-shielded/?prdv=26AWG](Altronics - 26AWG) - $.30/m
 - [http://www.altronics.com.au/cable/hookup-non-shielded/?prdv=13AWG](Altronics - 13AWG) - $2.05/m
+- [http://www.altronics.com.au/p/w2110-20-0.18-white-red-figure-8-cable/](Altronics - 20AWG, 5A) - $.77/m
 
-Length:
+Length of Power
+- Long runs for ESC power (About 2x2 700mm-800mm runs)
+  - Total 3.2m
 - Short runs to 5V PSU (10cm each max?)
+  - Total: 10cm
+- TOTAL: 3.3m
+Length of Signal
 - Long-ish runs to the ESCs (one in each hull)
-- Long runs for power (About four 700mm-800mm runs)
+  - Total 4x700mm + 3x100mm = 3.1m
+- Modem signal bundle, 10cm-15cm
+  - Total: 4x150mm = 600mm
+- TOTAL: 3.7m
 
 
 

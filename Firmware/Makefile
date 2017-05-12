@@ -33,8 +33,9 @@ init:
 	-git clone https://github.com/ArduPilot/ardupilot.git ardupilot-source
 	(cd ardupilot-source; git checkout master-AVR)
 	(cd ardupilot-source; git submodule update --init --recursive)
-	-git clone https://github.com/mikalhart/IridiumSBD.git ardupilot-source/modules/IridiumSBD
-	cd ardupilot-source/libraries/IridiumSBD; git checkout v1.1
+
+ardupilot-source/APMrover2/Makefile:
+	test -e ardupilot-source/APMrover2/Makefile || echo "Run `make init` to check out the ArduPilot code"
 
 $(PATCHED_FILES): $(SRCDIR)%: mods/%.patch
 	cd $(dir $@); git checkout $(notdir $@)

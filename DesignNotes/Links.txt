@@ -1,0 +1,35 @@
+
+
+Useful info
+===========
+[http://oceanmotion.org/html/resources/oscar.htm](Ocean currents)
+[http://www.modelboats.co.uk/forums/postings.asp?th=44137&p=1](Picking a prop/motor)
+
+
+Pumps and Motors
+================
+[http://docs.bluerobotics.com/thrusters/t200/](BlueRobotics T200)
+[http://www.rulepumpsupply.com/Bilge_Pumps.html](Bilge Pumps)
+
+
+MicroTransNat Compeditors
+==========================
+
+[http://www.microtransat.org/2016_epsom_college_boat.php](That'll Do)
+---------
+Sailboat, 4x 9V panels
+
+[http://www.microtransat.org/2016_usna_boat.php](USNA)
+----------
+Sailboat,
+
+[http://www.microtransat.org/2016_andrej_osusky_boat.php](Andy Osusky)
+------------
+Sailboat
+
+[http://www.microtransat.org/2016_gortobot_boat.php](Gortobot)
+---------------
+Sailboat
+
+<!-- vim: ft=markdown
+-->

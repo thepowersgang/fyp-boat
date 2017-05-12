@@ -1,0 +1,10 @@
+
+"PM" - Power Socket
+(From top)
+- JP_VCC
+- JP_VCC
+- PK4/ADC12
+- PK5/ADC13
+- GND
+- GND
+
