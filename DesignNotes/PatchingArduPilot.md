@@ -34,3 +34,32 @@ Satellite modem
 
 
 
+
+
+Remote Telemetry Options
+========================
+
+Remote telemetry is needed, either by a 3G modem (suitable for initial testing close to land), or via Satellite modem.
+Both of these links are bandwidth-constrained (the satellite far more so than the 3G), so require some form of limiting and batching.
+
+Two major options for doing this bandwidth limiting: Custom telemetry/control logic on the APM board, or an external board doing proxying (and handling the different communiation forms).
+- Proxy board is architectually simpler, but requires a second microcontroller board (more power drain)
+
+
+3G Modem
+---------
+
+3G modem functionally acts as a serial bridge. Sending custom telemetry data over that isn't hard, but getting commands back is difficult.
+Ideally, the 3G port would be able to inject MAVLink commands into the main MAVLink stream, but that isn't exceptionally simple. (It's doable, but runs into issues with getting ACKs back)
+
+Existing MAVLink telemetry can't be turned to below 1Hz, so just passing that through isn't an option (and wouldn't work for the sattelite anyway)
+
+
+MAVLink Bridging
+----------------
+
+MAVLink is well documented [http://ardupilot.org/dev/docs/mavlink-commands.html](Meta-link), and should be pretty easy to filter/bridge with an external board
+- External board watches its serial port and caches the last telemetry update to send every `n` minutes.
+- Passes through commands and replies to commands (and the next telemetry update?)
+
+
