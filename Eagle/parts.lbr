@@ -64,15 +64,15 @@
 <smd name="U$20-3" x="-13.97" y="6.35" dx="1.27" dy="0.635" layer="1"/>
 <smd name="U$20-4" x="-13.97" y="5.08" dx="1.27" dy="0.635" layer="1"/>
 <smd name="U$20-5" x="-13.97" y="3.81" dx="1.27" dy="0.635" layer="1"/>
-<pad name="A0" x="-8.89" y="8.89" drill="0.8" shape="square"/>
-<pad name="A1" x="-7.62" y="8.89" drill="0.8" shape="square"/>
-<pad name="A2" x="-6.35" y="8.89" drill="0.8" shape="square"/>
-<pad name="A3" x="-5.08" y="8.89" drill="0.8" shape="square"/>
-<pad name="A4" x="-3.81" y="8.89" drill="0.8" shape="square"/>
-<pad name="A5" x="-2.54" y="8.89" drill="0.8" shape="square"/>
-<pad name="A6" x="-1.27" y="8.89" drill="0.8" shape="square"/>
-<pad name="A7" x="0" y="8.89" drill="0.8" shape="square"/>
-<pad name="A8" x="1.27" y="8.89" drill="0.8" shape="square"/>
+<pad name="A0" x="-8.89" y="8.89" drill="0.5" diameter="1.016"/>
+<pad name="A1" x="-7.62" y="6.35" drill="0.6"/>
+<pad name="A2" x="-6.35" y="6.35" drill="0.6"/>
+<pad name="A3" x="-5.08" y="6.35" drill="0.5"/>
+<pad name="A4" x="-3.81" y="6.35" drill="0.5"/>
+<pad name="A5" x="-2.54" y="6.35" drill="0.5"/>
+<pad name="A6" x="-1.27" y="6.35" drill="0.5"/>
+<pad name="A7" x="0" y="6.35" drill="0.5"/>
+<pad name="A8" x="1.27" y="6.35" drill="0.5"/>
 <wire x1="-15.24" y1="10.16" x2="19.05" y2="10.16" width="0.127" layer="1"/>
 <wire x1="19.05" y1="10.16" x2="19.05" y2="-8.89" width="0.127" layer="1"/>
 <wire x1="19.05" y1="-8.89" x2="-15.24" y2="-8.89" width="0.127" layer="1"/>
@@ -87,8 +87,8 @@
 <pad name="O8" x="-13.97" y="-7.62" drill="0.8" shape="square"/>
 <pad name="O_VCC" x="-12.7" y="1.27" drill="0.8" shape="square"/>
 <pad name="O_GND" x="-11.43" y="1.27" drill="0.8" shape="square"/>
-<pad name="A_VCC" x="-8.89" y="7.62" drill="0.8" shape="square"/>
-<pad name="A_GND" x="-8.89" y="6.35" drill="0.8" shape="square"/>
+<pad name="A_VCC" x="-8.89" y="7.62" drill="0.6"/>
+<pad name="A_GND" x="-8.89" y="6.35" drill="0.6"/>
 <smd name="U$17-6" x="-11.43" y="-7.62" dx="1.27" dy="0.635" layer="1"/>
 <smd name="U$17-5" x="-11.43" y="-6.35" dx="1.27" dy="0.635" layer="1"/>
 <smd name="U$17-4" x="-11.43" y="-5.08" dx="1.27" dy="0.635" layer="1"/>
@@ -124,10 +124,20 @@
 <pad name="P$27" x="10.16" y="7.62" drill="0.8" shape="square"/>
 <pad name="P$29" x="10.16" y="6.35" drill="0.8" shape="square"/>
 <pad name="P$30" x="11.43" y="6.35" drill="0.8" shape="square"/>
-<pad name="A9" x="2.54" y="8.89" drill="0.8" shape="square"/>
-<pad name="A10" x="3.81" y="8.89" drill="0.8" shape="square"/>
-<pad name="A11" x="5.08" y="8.89" drill="0.8" shape="square"/>
-<pad name="A12" x="6.35" y="8.89" drill="0.8" shape="square"/>
+<pad name="A9" x="2.54" y="6.35" drill="0.5"/>
+<pad name="A10" x="3.81" y="6.35" drill="0.5"/>
+<pad name="A11" x="5.08" y="6.35" drill="0.5"/>
+<pad name="A12" x="6.35" y="6.35" drill="0.5"/>
+</package>
+<package name="BESC30-R1">
+<pad name="12V_BLACK" x="-5.08" y="0" drill="1.1" diameter="2.54"/>
+<pad name="12V_RED" x="-5.08" y="-3.81" drill="1.1" diameter="2.54"/>
+<pad name="MOTOR_BLACK" x="11.43" y="-3.81" drill="1" diameter="2.54"/>
+<pad name="MOTOR_YELLOW" x="11.43" y="0" drill="1" diameter="2.54"/>
+<pad name="MOTOR_RED" x="11.43" y="3.81" drill="1" diameter="2.54"/>
+<pad name="SIG_BROWN" x="-5.08" y="3.81" drill="0.8" diameter="1.778"/>
+<pad name="SIG_RED" x="-5.08" y="6.35" drill="0.8" diameter="1.778"/>
+<pad name="SIG_ORANGE" x="-5.08" y="8.89" drill="0.8" diameter="1.778"/>
 </package>
 </packages>
 <symbols>
@@ -141,11 +151,11 @@
 <pin name="BATT_POS" x="-35.56" y="7.62" length="middle"/>
 <pin name="BATT_NEG" x="-35.56" y="5.08" length="middle"/>
 <pin name="12V_POS" x="20.32" y="-5.08" length="middle" rot="R180"/>
-<pin name="12V_NEG" x="20.32" y="-7.62" length="middle" rot="R180"/>
+<pin name="12V_GND" x="20.32" y="-7.62" length="middle" rot="R180"/>
 <pin name="5V_A_POS" x="20.32" y="2.54" length="middle" rot="R180"/>
-<pin name="5V_A_NEG" x="20.32" y="0" length="middle" rot="R180"/>
+<pin name="5V_A_GND" x="20.32" y="0" length="middle" rot="R180"/>
 <pin name="5V_B_POS" x="20.32" y="10.16" length="middle" rot="R180"/>
-<pin name="5V_B_NEG" x="20.32" y="7.62" length="middle" rot="R180"/>
+<pin name="5V_B_GND" x="20.32" y="7.62" length="middle" rot="R180"/>
 <text x="-15.24" y="0" size="1.27" layer="94">CY1220</text>
 <text x="-27.94" y="15.24" size="1.27" layer="94">&gt;NAME</text>
 </symbol>
@@ -164,11 +174,11 @@
 <wire x1="12.7" y1="-7.62" x2="12.7" y2="10.16" width="0.254" layer="94"/>
 <wire x1="12.7" y1="10.16" x2="-12.7" y2="10.16" width="0.254" layer="94"/>
 <wire x1="-12.7" y1="10.16" x2="-12.7" y2="-7.62" width="0.254" layer="94"/>
-<pin name="12V_POS" x="-17.78" y="-5.08" length="middle"/>
-<pin name="12V_NEG" x="-17.78" y="-2.54" length="middle"/>
+<pin name="POS" x="-17.78" y="-5.08" length="middle"/>
+<pin name="NEG" x="-17.78" y="-2.54" length="middle"/>
 <pin name="GND" x="-17.78" y="2.54" length="middle"/>
 <pin name="PWM" x="-17.78" y="5.08" length="middle"/>
-<pin name="DIR" x="-17.78" y="7.62" length="middle"/>
+<pin name="5V_BEC" x="-17.78" y="7.62" length="middle"/>
 <pin name="RED" x="17.78" y="-2.54" length="middle" rot="R180"/>
 <pin name="YELLOW" x="17.78" y="0" length="middle" rot="R180"/>
 <pin name="BLACK" x="17.78" y="2.54" length="middle" rot="R180"/>
@@ -180,7 +190,7 @@
 <wire x1="17.78" y1="-25.4" x2="17.78" y2="20.32" width="0.254" layer="94"/>
 <wire x1="17.78" y1="20.32" x2="-86.36" y2="20.32" width="0.254" layer="94"/>
 <pin name="VCC_OUT" x="-91.44" y="5.08" length="middle"/>
-<pin name="GND_OUT" x="-91.44" y="2.54" length="middle"/>
+<pin name="GND@1" x="-91.44" y="2.54" length="middle"/>
 <pin name="OUT8" x="-91.44" y="-5.08" length="middle"/>
 <pin name="OUT7" x="-91.44" y="-7.62" length="middle"/>
 <pin name="OUT6" x="-91.44" y="-10.16" length="middle"/>
@@ -190,12 +200,12 @@
 <pin name="OUT2" x="-91.44" y="-20.32" length="middle"/>
 <pin name="OUT1" x="-91.44" y="-22.86" length="middle"/>
 <pin name="VCC@1" x="-81.28" y="25.4" length="middle" rot="R270"/>
-<pin name="TX1-O" x="-78.74" y="25.4" length="middle" rot="R270"/>
-<pin name="RX1-I" x="-76.2" y="25.4" length="middle" rot="R270"/>
+<pin name="MUX_TX" x="-78.74" y="25.4" length="middle" rot="R270"/>
+<pin name="MUX_RX" x="-76.2" y="25.4" length="middle" rot="R270"/>
 <pin name="NC@1" x="-73.66" y="25.4" length="middle" rot="R270"/>
 <pin name="GND" x="-71.12" y="25.4" length="middle" rot="R270"/>
 <pin name="VCC_A" x="-63.5" y="25.4" length="middle" rot="R270"/>
-<pin name="GND_A" x="-60.96" y="25.4" length="middle" rot="R270"/>
+<pin name="GND@2" x="-60.96" y="25.4" length="middle" rot="R270"/>
 <pin name="A1" x="-55.88" y="25.4" length="middle" rot="R270"/>
 <pin name="A2" x="-53.34" y="25.4" length="middle" rot="R270"/>
 <pin name="A3" x="-50.8" y="25.4" length="middle" rot="R270"/>
@@ -215,7 +225,7 @@
 <pin name="P$35" x="-12.7" y="25.4" length="middle" rot="R270"/>
 <pin name="P$36" x="-10.16" y="25.4" length="middle" rot="R270"/>
 <pin name="VCC_IN" x="22.86" y="17.78" length="middle" rot="R180"/>
-<pin name="GND_IN" x="22.86" y="15.24" length="middle" rot="R180"/>
+<pin name="GND@3" x="22.86" y="15.24" length="middle" rot="R180"/>
 <pin name="IN8" x="22.86" y="10.16" length="middle" rot="R180"/>
 <pin name="IN7" x="22.86" y="7.62" length="middle" rot="R180"/>
 <pin name="IN6" x="22.86" y="5.08" length="middle" rot="R180"/>
@@ -230,10 +240,10 @@
 <pin name="ADC13@4" x="-58.42" y="-30.48" length="middle" rot="R90"/>
 <pin name="GND@5" x="-55.88" y="-30.48" length="middle" rot="R90"/>
 <pin name="GND@6" x="-53.34" y="-30.48" length="middle" rot="R90"/>
-<pin name="P$52" x="-45.72" y="-30.48" length="middle" rot="R90"/>
-<pin name="P$53" x="-43.18" y="-30.48" length="middle" rot="R90"/>
-<pin name="P$54" x="-40.64" y="-30.48" length="middle" rot="R90"/>
-<pin name="P$55" x="-38.1" y="-30.48" length="middle" rot="R90"/>
+<pin name="3V3" x="-45.72" y="-30.48" length="middle" rot="R90"/>
+<pin name="I2C_SDL" x="-43.18" y="-30.48" length="middle" rot="R90"/>
+<pin name="I2C_SDA" x="-40.64" y="-30.48" length="middle" rot="R90"/>
+<pin name="GND@7" x="-38.1" y="-30.48" length="middle" rot="R90"/>
 <pin name="P$56" x="15.24" y="-30.48" length="middle" rot="R90"/>
 <pin name="P$57" x="12.7" y="-30.48" length="middle" rot="R90"/>
 <pin name="P$58" x="10.16" y="-30.48" length="middle" rot="R90"/>
@@ -330,6 +340,38 @@
 <pin name="RX" x="-22.86" y="-2.54" length="middle"/>
 <pin name="GND" x="-22.86" y="-5.08" length="middle"/>
 </symbol>
+<symbol name="SOLARPANEL">
+<wire x1="-17.78" y1="25.4" x2="-17.78" y2="-22.86" width="0.254" layer="94"/>
+<wire x1="-17.78" y1="-22.86" x2="15.24" y2="-22.86" width="0.254" layer="94"/>
+<wire x1="15.24" y1="-22.86" x2="15.24" y2="25.4" width="0.254" layer="94"/>
+<wire x1="15.24" y1="25.4" x2="-17.78" y2="25.4" width="0.254" layer="94"/>
+<pin name="POS" x="-7.62" y="30.48" length="middle" rot="R270"/>
+<pin name="NEG" x="5.08" y="30.48" length="middle" rot="R270"/>
+<rectangle x1="-15.24" y1="17.78" x2="-10.16" y2="22.86" layer="98" rot="R90"/>
+<rectangle x1="-7.62" y1="17.78" x2="-2.54" y2="22.86" layer="98"/>
+<rectangle x1="0" y1="17.78" x2="5.08" y2="22.86" layer="98"/>
+<rectangle x1="7.62" y1="17.78" x2="12.7" y2="22.86" layer="98"/>
+<rectangle x1="7.62" y1="10.16" x2="12.7" y2="15.24" layer="98"/>
+<rectangle x1="0" y1="10.16" x2="5.08" y2="15.24" layer="98"/>
+<rectangle x1="-7.62" y1="10.16" x2="-2.54" y2="15.24" layer="98"/>
+<rectangle x1="-15.24" y1="10.16" x2="-10.16" y2="15.24" layer="98"/>
+<rectangle x1="-15.24" y1="2.54" x2="-10.16" y2="7.62" layer="98"/>
+<rectangle x1="-7.62" y1="2.54" x2="-2.54" y2="7.62" layer="98"/>
+<rectangle x1="0" y1="2.54" x2="5.08" y2="7.62" layer="98"/>
+<rectangle x1="7.62" y1="2.54" x2="12.7" y2="7.62" layer="98"/>
+<rectangle x1="7.62" y1="-5.08" x2="12.7" y2="0" layer="98"/>
+<rectangle x1="7.62" y1="-12.7" x2="12.7" y2="-7.62" layer="98"/>
+<rectangle x1="7.62" y1="-20.32" x2="12.7" y2="-15.24" layer="98"/>
+<rectangle x1="0" y1="-20.32" x2="5.08" y2="-15.24" layer="98"/>
+<rectangle x1="0" y1="-12.7" x2="5.08" y2="-7.62" layer="98"/>
+<rectangle x1="0" y1="-5.08" x2="5.08" y2="0" layer="98"/>
+<rectangle x1="-7.62" y1="-5.08" x2="-2.54" y2="0" layer="98"/>
+<rectangle x1="-7.62" y1="-12.7" x2="-2.54" y2="-7.62" layer="98"/>
+<rectangle x1="-7.62" y1="-20.32" x2="-2.54" y2="-15.24" layer="98"/>
+<rectangle x1="-15.24" y1="-20.32" x2="-10.16" y2="-15.24" layer="98"/>
+<rectangle x1="-15.24" y1="-12.7" x2="-10.16" y2="-7.62" layer="98"/>
+<rectangle x1="-15.24" y1="-5.08" x2="-10.16" y2="0" layer="98"/>
+</symbol>
 </symbols>
 <devicesets>
 <deviceset name="ARDUCOPTER2.8">
@@ -339,6 +381,7 @@
 <devices>
 <device name="" package="ARDUCOPTER2.8">
 <connects>
+<connect gate="G$1" pin="3V3" pad="I2C_1"/>
 <connect gate="G$1" pin="A1" pad="A0"/>
 <connect gate="G$1" pin="A10" pad="A9"/>
 <connect gate="G$1" pin="A11" pad="A10"/>
@@ -354,11 +397,14 @@
 <connect gate="G$1" pin="ADC12@3" pad="U$17-3"/>
 <connect gate="G$1" pin="ADC13@4" pad="U$17-4"/>
 <connect gate="G$1" pin="GND" pad="U$20-5"/>
+<connect gate="G$1" pin="GND@1" pad="O_GND"/>
+<connect gate="G$1" pin="GND@2" pad="A_GND"/>
+<connect gate="G$1" pin="GND@3" pad="I_GND"/>
 <connect gate="G$1" pin="GND@5" pad="U$17-5"/>
 <connect gate="G$1" pin="GND@6" pad="U$17-6"/>
-<connect gate="G$1" pin="GND_A" pad="A_GND"/>
-<connect gate="G$1" pin="GND_IN" pad="I_GND"/>
-<connect gate="G$1" pin="GND_OUT" pad="O_GND"/>
+<connect gate="G$1" pin="GND@7" pad="I2C_4"/>
+<connect gate="G$1" pin="I2C_SDA" pad="I2C_3"/>
+<connect gate="G$1" pin="I2C_SDL" pad="I2C_2"/>
 <connect gate="G$1" pin="IN1" pad="I1"/>
 <connect gate="G$1" pin="IN2" pad="I2"/>
 <connect gate="G$1" pin="IN3" pad="I3"/>
@@ -369,6 +415,8 @@
 <connect gate="G$1" pin="IN8" pad="I8"/>
 <connect gate="G$1" pin="JP_VCC@1" pad="U$17-1"/>
 <connect gate="G$1" pin="JP_VCC@2" pad="U$17-2"/>
+<connect gate="G$1" pin="MUX_RX" pad="U$20-3"/>
+<connect gate="G$1" pin="MUX_TX" pad="U$20-2"/>
 <connect gate="G$1" pin="NC@1" pad="U$20-4"/>
 <connect gate="G$1" pin="OUT1" pad="O1"/>
 <connect gate="G$1" pin="OUT2" pad="O2"/>
@@ -384,10 +432,6 @@
 <connect gate="G$1" pin="P$34" pad="P$28"/>
 <connect gate="G$1" pin="P$35" pad="P$29"/>
 <connect gate="G$1" pin="P$36" pad="P$30"/>
-<connect gate="G$1" pin="P$52" pad="I2C_1"/>
-<connect gate="G$1" pin="P$53" pad="I2C_2"/>
-<connect gate="G$1" pin="P$54" pad="I2C_3"/>
-<connect gate="G$1" pin="P$55" pad="I2C_4"/>
 <connect gate="G$1" pin="P$56" pad="GPS_4"/>
 <connect gate="G$1" pin="P$57" pad="GPS_3"/>
 <connect gate="G$1" pin="P$58" pad="GPS_2"/>
@@ -397,8 +441,6 @@
 <connect gate="G$1" pin="P$62" pad="GPS_N_3"/>
 <connect gate="G$1" pin="P$63" pad="GPS_N_2"/>
 <connect gate="G$1" pin="P$64" pad="GPS_N_1"/>
-<connect gate="G$1" pin="RX1-I" pad="U$20-3"/>
-<connect gate="G$1" pin="TX1-O" pad="U$20-2"/>
 <connect gate="G$1" pin="VCC@1" pad="U$20-1"/>
 <connect gate="G$1" pin="VCC_A" pad="A_VCC"/>
 <connect gate="G$1" pin="VCC_IN" pad="I_VDD"/>
@@ -415,11 +457,19 @@
 <gate name="G$1" symbol="BESC30-R1" x="63.5" y="-10.16"/>
 </gates>
 <devices>
-<device name="">
+<device name="" package="BESC30-R1">
+<connects>
+<connect gate="G$1" pin="5V_BEC" pad="SIG_RED"/>
+<connect gate="G$1" pin="BLACK" pad="MOTOR_BLACK"/>
+<connect gate="G$1" pin="GND" pad="SIG_BROWN"/>
+<connect gate="G$1" pin="NEG" pad="12V_BLACK"/>
+<connect gate="G$1" pin="POS" pad="12V_RED"/>
+<connect gate="G$1" pin="PWM" pad="SIG_ORANGE"/>
+<connect gate="G$1" pin="RED" pad="MOTOR_RED"/>
+<connect gate="G$1" pin="YELLOW" pad="MOTOR_YELLOW"/>
+</connects>
 <technologies>
-<technology name="">
-<attribute name="_EXTERNAL_" value=""/>
-</technology>
+<technology name=""/>
 </technologies>
 </device>
 </devices>
@@ -483,6 +533,20 @@
 <deviceset name="MAX3232">
 <gates>
 <gate name="G$1" symbol="MAX3232" x="2.54" y="2.54"/>
+</gates>
+<devices>
+<device name="">
+<technologies>
+<technology name="">
+<attribute name="_EXTERNAL_" value="" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="SOLARPANEL">
+<gates>
+<gate name="G$1" symbol="SOLARPANEL" x="20.32" y="2.54"/>
 </gates>
 <devices>
 <device name="">

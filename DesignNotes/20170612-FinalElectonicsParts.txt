@@ -1,0 +1,34 @@
+Full BOM:
+
+
+
+
+BOM Patch (2017-06-12)
+- 1x Altronics P1710	$4.75	DE9 Male/Male adapater	- eventaully required (modem)
+- 1x Altronics P1901B	$5.50	USB A-A cable         	- semi-optional (modem power)
+- 2x Altronics M8610	$3.75	30cm SAE Bullet Lead   	- eventually required (interconnect)
+- 1x Altronics P0802	$4.50	XLR 3 pin Male        	- eventually required (interconnect)
+- 1x Altronics P0800	$5.40	XLR 3 pin Female      	- eventually required (interconnect)
+- 1x RS 143-015    	$?.??	DF13-6S-1.25C housing (10 bag) - Optional (5V from motor controllers)
+- 1x Altronics P8600	$8.95	IP67 MC4 Solar Panel 30A Line Plug Socket Connectors	- Required (solar panel)
+
+
+NOTES:
+
+
+Fuses!
+- +12V to motors, 2x - 5A limit?
+
+Battery Connectors:
+- Slave sled to body
+- Master to body
+
+2x Altronics M8610	- 2pin SAE Bullet Connector
+  http://www.altronics.com.au/p/m8610-2-pin-sae-bullet-connector-30cm-lead/
+
+Motor Power:
+- XLR 3pin connectors
+
+
+
+
