@@ -16,7 +16,7 @@ IridiumTelemtry::IridiumTelemtry(const Rover& rover_inst):
     m_min_since_ping(0)
 {
     // Set a sufficiently-large TX bufffer for a full message (prevents excessive tick times)
-    hal.uartC->begin(19200, 128, /*txSpace=*/256);
+    hal.uartC->begin(19200, /*rxSpace=*/128, /*txSpace=*/256);
 }
 
 void IridiumTelemtry::update()

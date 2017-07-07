@@ -18,12 +18,12 @@ NEW_FILES += libraries/UWA_IridiumSBD/UWA_IridiumSBD.h libraries/UWA_IridiumSBD/
 NEW_FILES := $(addprefix $(SRCDIR),$(NEW_FILES))
 PATCHED_FILES := $(addprefix $(SRCDIR),$(PATCHED_FILES))
 
-BIN := APMrover2.elf
+APMROVER2_BIN := APMrover2.elf
 
-all: $(BIN)
+all: $(APMROVER2_BIN)
 
 
-$(BIN): ardupilot-source/APMrover2/APMrover2.elf
+$(APMROVER2_BIN): ardupilot-source/APMrover2/APMrover2.elf
 
 ardupilot-source/APMrover2/APMrover2.elf: ardupilot-source/APMrover2/Makefile $(PATCHED_FILES) $(NEW_FILES)
 	mkdir -p builddir
