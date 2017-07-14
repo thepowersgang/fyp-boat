@@ -26,6 +26,16 @@ Option 2: Custom format
 ### Downsides
 - Requires a custom viewer (or client-side conversion code)
 
+
+Avaliable Code
+==============
+
+- `ardupilot-source/libraries/GCS_MAVLink/include/mavlink/v1.0/ardupilotmega`
+  - Contains the MAVLink serialisation support
+  - Dowside, it's tied to serial ports. (can't write to a buffer)
+- Pre-written I-SBD driver (from earlier in the year)
+
+
 Format overview
 ===============
 All messages have a 16-bit CRC/checksum of all message data (format is whatever is avaiable, TODO)
