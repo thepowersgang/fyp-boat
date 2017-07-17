@@ -520,7 +520,7 @@
 <part name="BATT2" library="parts" deviceset="HT12V3.3" device=""/>
 <part name="BATT3" library="parts" deviceset="HT12V3.3" device=""/>
 <part name="BATT4" library="parts" deviceset="HT12V3.3" device=""/>
-<part name="U$4" library="parts" deviceset="MAX3232" device=""/>
+<part name="MAX232" library="parts" deviceset="MAX3232" device=""/>
 <part name="U$2" library="parts" deviceset="SOLARPANEL" device=""/>
 <part name="U$3" library="parts" deviceset="BESC30-R1" device=""/>
 <part name="U$7" library="parts" deviceset="BESC30-R1" device=""/>
@@ -538,7 +538,8 @@
 <text x="-17.78" y="86.36" size="1.778" layer="91">DF13-5S</text>
 <text x="-17.78" y="-58.42" size="1.778" layer="91">Hookup</text>
 <text x="-5.08" y="-15.24" size="1.778" layer="91">USB -&gt; Plug</text>
-<text x="-22.86" y="10.16" size="1.778" layer="91">USB -&gt; DF13-6S</text>
+<text x="-22.86" y="10.16" size="1.778" layer="91">USB -&gt; DF13-6S
+(optional)</text>
 <text x="-58.42" y="17.78" size="1.778" layer="91">Provided</text>
 <text x="33.02" y="-50.8" size="1.778" layer="91">NC</text>
 <text x="33.02" y="-53.34" size="1.778" layer="91">NC</text>
@@ -547,6 +548,8 @@
 <text x="111.76" y="-35.56" size="1.778" layer="91">Modem</text>
 <text x="17.78" y="25.4" size="1.778" layer="91">DC13-4S</text>
 <text x="-2.54" y="25.4" size="1.778" layer="91">DF13-6S</text>
+<text x="-50.8" y="58.42" size="1.778" layer="91">BEC (to APM)</text>
+<text x="27.94" y="-68.58" size="1.778" layer="91">Gender Changer+Crossover</text>
 </plain>
 <instances>
 <instance part="U$1" gate="G$1" x="63.5" y="50.8"/>
@@ -556,7 +559,7 @@
 <instance part="BATT2" gate="G$1" x="-127" y="33.02"/>
 <instance part="BATT3" gate="G$1" x="-127" y="2.54"/>
 <instance part="BATT4" gate="G$1" x="-127" y="-25.4"/>
-<instance part="U$4" gate="G$1" x="12.7" y="-48.26"/>
+<instance part="MAX232" gate="G$1" x="12.7" y="-48.26"/>
 <instance part="U$2" gate="G$1" x="-124.46" y="-58.42" rot="R270"/>
 <instance part="U$3" gate="G$1" x="154.94" y="7.62"/>
 <instance part="U$7" gate="G$1" x="154.94" y="-15.24"/>
@@ -662,7 +665,7 @@
 </net>
 <net name="N$5" class="0">
 <segment>
-<pinref part="U$4" gate="G$1" pin="DE9-1"/>
+<pinref part="MAX232" gate="G$1" pin="DE9-1"/>
 <wire x1="33.02" y1="-40.64" x2="35.56" y2="-40.64" width="0.1524" layer="91"/>
 <wire x1="35.56" y1="-40.64" x2="48.26" y2="-55.88" width="0.1524" layer="91"/>
 <pinref part="U$5" gate="G$1" pin="DCD"/>
@@ -671,7 +674,7 @@
 </net>
 <net name="N$6" class="0">
 <segment>
-<pinref part="U$4" gate="G$1" pin="DE9-2"/>
+<pinref part="MAX232" gate="G$1" pin="DE9-2"/>
 <wire x1="33.02" y1="-43.18" x2="43.18" y2="-43.18" width="0.1524" layer="91"/>
 <wire x1="43.18" y1="-43.18" x2="45.72" y2="-45.72" width="0.1524" layer="91"/>
 <pinref part="U$5" gate="G$1" pin="TXD"/>
@@ -680,7 +683,7 @@
 </net>
 <net name="N$7" class="0">
 <segment>
-<pinref part="U$4" gate="G$1" pin="DE9-3"/>
+<pinref part="MAX232" gate="G$1" pin="DE9-3"/>
 <wire x1="33.02" y1="-45.72" x2="43.18" y2="-45.72" width="0.1524" layer="91"/>
 <wire x1="43.18" y1="-45.72" x2="45.72" y2="-48.26" width="0.1524" layer="91"/>
 <pinref part="U$5" gate="G$1" pin="RXD"/>
@@ -689,7 +692,7 @@
 </net>
 <net name="N$8" class="0">
 <segment>
-<pinref part="U$4" gate="G$1" pin="DE9-4"/>
+<pinref part="MAX232" gate="G$1" pin="DE9-4"/>
 <wire x1="33.02" y1="-48.26" x2="43.18" y2="-48.26" width="0.1524" layer="91"/>
 <pinref part="U$5" gate="G$1" pin="DTR"/>
 <wire x1="78.74" y1="-53.34" x2="48.26" y2="-53.34" width="0.1524" layer="91"/>
@@ -698,7 +701,7 @@
 </net>
 <net name="N$9" class="0">
 <segment>
-<pinref part="U$4" gate="G$1" pin="DE9-7"/>
+<pinref part="MAX232" gate="G$1" pin="DE9-7"/>
 <wire x1="33.02" y1="-55.88" x2="38.1" y2="-55.88" width="0.1524" layer="91"/>
 <wire x1="38.1" y1="-55.88" x2="50.8" y2="-43.18" width="0.1524" layer="91"/>
 <pinref part="U$5" gate="G$1" pin="RTS"/>
@@ -707,7 +710,7 @@
 </net>
 <net name="N$10" class="0">
 <segment>
-<pinref part="U$4" gate="G$1" pin="DE9-8"/>
+<pinref part="MAX232" gate="G$1" pin="DE9-8"/>
 <wire x1="33.02" y1="-58.42" x2="35.56" y2="-58.42" width="0.1524" layer="91"/>
 <wire x1="35.56" y1="-58.42" x2="35.56" y2="-55.88" width="0.1524" layer="91"/>
 <wire x1="35.56" y1="-55.88" x2="50.8" y2="-40.64" width="0.1524" layer="91"/>
@@ -717,7 +720,7 @@
 </net>
 <net name="N$13" class="0">
 <segment>
-<pinref part="U$4" gate="G$1" pin="TX"/>
+<pinref part="MAX232" gate="G$1" pin="TX"/>
 <wire x1="-10.16" y1="-48.26" x2="-12.7" y2="-48.26" width="0.1524" layer="91"/>
 <wire x1="-12.7" y1="-48.26" x2="-12.7" y2="-30.48" width="0.1524" layer="91"/>
 <wire x1="-12.7" y1="-30.48" x2="22.86" y2="-30.48" width="0.1524" layer="91"/>
@@ -725,7 +728,7 @@
 </net>
 <net name="N$11" class="0">
 <segment>
-<pinref part="U$4" gate="G$1" pin="RX"/>
+<pinref part="MAX232" gate="G$1" pin="RX"/>
 <wire x1="-10.16" y1="-50.8" x2="-15.24" y2="-50.8" width="0.1524" layer="91"/>
 <wire x1="-15.24" y1="-50.8" x2="-15.24" y2="-27.94" width="0.1524" layer="91"/>
 <wire x1="-15.24" y1="-27.94" x2="20.32" y2="-27.94" width="0.1524" layer="91"/>
@@ -820,7 +823,7 @@
 </net>
 <net name="N$12" class="0">
 <segment>
-<pinref part="U$4" gate="G$1" pin="GND"/>
+<pinref part="MAX232" gate="G$1" pin="GND"/>
 <label x="-12.7" y="-53.34" size="1.778" layer="95"/>
 <wire x1="-10.16" y1="-53.34" x2="-17.78" y2="-53.34" width="0.1524" layer="91"/>
 <wire x1="-17.78" y1="-53.34" x2="-17.78" y2="-25.4" width="0.1524" layer="91"/>
@@ -921,7 +924,7 @@
 </net>
 <net name="N$14" class="0">
 <segment>
-<pinref part="U$4" gate="G$1" pin="VCC"/>
+<pinref part="MAX232" gate="G$1" pin="VCC"/>
 <wire x1="-10.16" y1="-45.72" x2="-10.16" y2="-33.02" width="0.1524" layer="91"/>
 <wire x1="-10.16" y1="-33.02" x2="25.4" y2="-33.02" width="0.1524" layer="91"/>
 <wire x1="25.4" y1="-33.02" x2="25.4" y2="20.32" width="0.1524" layer="91"/>

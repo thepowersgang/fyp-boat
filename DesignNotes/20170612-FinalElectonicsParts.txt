@@ -5,12 +5,14 @@ Full BOM:
 
 BOM Patch (2017-06-12)
 - 1x Altronics P1710	$4.75	DE9 Male/Male adapater	- eventaully required (modem)
+ > Must do TX/RX switching.
 - 1x Altronics P1901B	$5.50	USB A-A cable         	- semi-optional (modem power)
 - 2x Altronics M8610	$3.75	30cm SAE Bullet Lead   	- eventually required (interconnect)
-- 1x Altronics P0802	$4.50	XLR 3 pin Male        	- eventually required (interconnect)
+- 1x Altronics P0807	$4.50	XLR 3 pin Male Chassis 	- eventually required (interconnect)
 - 1x Altronics P0800	$5.40	XLR 3 pin Female      	- eventually required (interconnect)
-- 1x RS 143-015    	$?.??	DF13-6S-1.25C housing (10 bag) - Optional (5V from motor controllers)
+- 1x RS 143-015    	$?.??	DF13-6S-1.25C housing (10 bag) - Optional (Power input to APM board, motors provide BEC)
 - 1x Altronics P8600	$8.95	IP67 MC4 Solar Panel 30A Line Plug Socket Connectors	- Required (solar panel)
+- 1x Altronics H0119	$4.70	80Lx60Wx30Hmm Flange Mount Box	- Optional
 
 
 NOTES:
@@ -29,6 +31,16 @@ Battery Connectors:
 Motor Power:
 - XLR 3pin connectors
 
+
+
+Dimensions and Restrictions:
+- 100mm max space in tubes
+- 10mm Mounting plate will sit just under the midline
+- ~45mm above, ~45mm below
+
+IDEAD: Chassis mounting XLR sockets for motors (or just for the port motor?)
+- Saves a little bit of space, and looks cool.
+- Takes up space on the mounting board.
 
 
 
