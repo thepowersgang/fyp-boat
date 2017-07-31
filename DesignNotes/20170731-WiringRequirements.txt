@@ -1,0 +1,24 @@
+
+# Backhaul current capacities:
+
+- 130W motors at 12V require approx 11A
+- Solar panel peaks at ~8.5A
+- Solar controller is fused at 20A (TODO: Check with datasheet)
+- Avaiable wire is Altronics W2110 (20AWG copper pair)
+ > 5A according to website, just under quater max draw
+
+## Motors
+NOTE: Almost irrelevant, as the provided cables are suitably long to reach the controllers
+- A small run from the controller to the jack is needed.
+- 130W motors at 12V  = 10.833A ~= 11A
+
+## Batteries
+- Four batteries supplying a peak of 22A collective
+- Long runs
+ > 20AWG cable should be sufficient for single-battery runs (assuming so)
+- Cross-hull run can be doubled-up.
+
+
+
+## Solar Connection
+- Short run to solar controller
