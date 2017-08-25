@@ -16,6 +16,12 @@ BOM Patch (2017-07-28)
 - 1x Altronics P3000	$1.20	DE9 Male Solder Cup	- eventaully required (modem)
 - 1x Altronics P1840	$3.20	Green 0.5m Cat5e UTP Ethernet Patch Cable	- eventually required (modem)
 
+BOm Patch (2017-08-04)
+- ?x Altronics W4150	$?.??	28AWG copper wire, 11A rated	- High-current interconnect
+ > Short total run, 1m maybe?
+- 1x Altronics H2309	$3.95	2 Way 15A Male And Female Inline Connector
+- ?x 	$?.??	Heat-shrink insulation	- Insulating bare solder joins
+
 
 NOTES:
 

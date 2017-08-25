@@ -1,0 +1,21 @@
+Batteries range from 10.5V to 13.7V (pretty hard limits for a lead-acid battery)
+ATmega2560 has a analog input range from Aref -> GNC (Aref is a supply pin, so 3.3V on the APM)
+
+Analog pins (S) are connected to PF0->7,PK0,SJ10-12
+
+13.7/3.3=4.15, so err on the side of caution and make a 5-fold divider
+
+1 + 3.3 gives a bit over this ratio (so a lower voltage)
+Use high valued resistors to reduce wastage, so 1k and 3k3 
+- Power draw would be 33mW for that arrangement.
+- Can increase resistance to decrease power loss
+
+100k and 330k chosen (due to avaliability)
+- Needs soldering and testing.
+
+
+
+CATCH: The common rail on the PSU is the + rail, this leads to complexities with the exact levels.
+- the ATMega references its inputs from GND to a reference (either 1.1/2.56 internal, or external Aref)
+- Assuming the 12V output from the solar controller is regulated to 12V, the ATMega's GND is 12V below the + rail
+- Given the battern ranges from 10.5 to 13.7V, GND to the divider.

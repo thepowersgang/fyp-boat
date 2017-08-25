@@ -17,8 +17,14 @@ NOTE: Almost irrelevant, as the provided cables are suitably long to reach the c
 - Long runs
  > 20AWG cable should be sufficient for single-battery runs (assuming so)
 - Cross-hull run can be doubled-up.
+ > Or use higher-grade cable (W4150, see solar)
+ > Get heatshrink to cover the join between connector cable and extension)
 
 
 
 ## Solar Connection
 - Short run to solar controller
+- Two connection pairs (one internal, one external)
+ - OR: Single connection pair? (Hard to do, have to thread wire though)
+- Needs proper wire, try W4150 (28AWG copper, 11A rated)
+ > Join using H2309 (15A 2way male+female inline connector)
