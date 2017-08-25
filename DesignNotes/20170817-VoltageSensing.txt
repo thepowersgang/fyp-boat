@@ -18,4 +18,97 @@ Use high valued resistors to reduce wastage, so 1k and 3k3
 CATCH: The common rail on the PSU is the + rail, this leads to complexities with the exact levels.
 - the ATMega references its inputs from GND to a reference (either 1.1/2.56 internal, or external Aref)
 - Assuming the 12V output from the solar controller is regulated to 12V, the ATMega's GND is 12V below the + rail
-- Given the battern ranges from 10.5 to 13.7V, GND to the divider.
+- Given the battery ranges from 10.5 to 13.7V, GND to the divider.
+ > Rough estimates are 11.8 (dead) to 14.5 (under charge)
+
+
+
+
+VRef values are 1.1V, 2.56V, or AVCC (3.3V)
+- The AREF pin is left floating (connected to an unused pad on the board)
+- Pick AVCC as that allows a larger range
+
+
+
+
+Floating Basis
+==============
+
+The controller (original, unknown about new) has the + terminals common. This means that the 0 point for the ADC isn't the 0V point for the batteries.
+
+Battery Voltage
+---------------
+11.8V to 14.5V max range
+
+Output voltage
+--------------
+Theory (requires testing): Output voltage is regulated to 12V
+- Likely issue: This controller supports both 12V and 24V operation, will it still supply 12V when the batteries are in a 24V arrangement?
+- The controller does autodetect the operating voltage, so could be picking a regulation voltage based on that
+- TODO: Test when new controller arrives
+
+Voltage Sensing
+-------------
+
+Drawing a diagram where 0V is the common + rail shows that the battery voltage can be divided and compared with the APM ground with minimal issues.
+However, this will lead to a negative relation between ADC reading and the battery voltage (assuming the output voltage is constant).
+If the output volage is the battery voltage, then the reading will be positively linear.
+
+
+### Equations (Assuming fixed output)
+All voltages are relative to the common `+` rail, and calculated values are rounded to 3 decimal places.
+
+Battery divided voltage (max)
+$-14.5 \times \frac{3.3}{1 + 3.3} = ~-11.128$
+
+Battery divided voltage (min)
+$-11.8 \times \frac{3.3}{1 + 3.3} = ~-9.056$
+
+APM GND
+$-12 = -12$
+APM AVCC (largest ADC reference)
+$-12 + 3.3 = -8.7$
+
+
+Analog input (max battery)
+$~-11.128 - -12 = ~0.872$
+Analog input (min battery)
+$~-9.056 - -12 = ~2.944$
+
+### Equations (Assuming dynamic output)
+All voltages are relative to the common `+` rail, and calculated values are rounded to 3 decimal places.
+
+Battery divided voltage (max)
+$-14.5 \times \frac{3.3}{1 + 3.3} = ~-11.128$
+
+Battery divided voltage (min)
+$-11.8 \times \frac{3.3}{1 + 3.3} = ~-9.056$
+
+
+Analog input (max battery)
+$~-11.128 - -14.5 = 3.372$
+Analog input (min battery)
+$~-9.056 - -11.8 = 2.744$
+
+### Limit checks
+
+With fixed 12V output, range is easily met with current divider. However, if the output follows the battery, then the range is violated at max charge.
+- This will require a smaller divisor to fit the range.
+- We want the max difference to be 3.3, set max to 3.1 for safety? For that
+
+$3.1 = -V_{max} \times K - -V_{max}$
+$3.1 = -( V_{max} \times K - V_{max} )$
+$3.1 = -V_{max} \times (K - 1)$
+$3.1 = V_{max} \times (1 - K)$
+$\frac{3.1}{V_{max}} = 1 - K$
+
+
+For a max voltage of 14.5, the `K` ratio should be $0.786$. Putting a $10\Omega$ and a $2.7\Omega$ resistor arrangement will provide a `K` of $0.787$. (Giving an actual voltage of 3.08V)
+
+
+### Conclusion
+In both cases, a resistor divider will work to provide the battery reading, the difference is the ideal ratio
+- For fixed voltage, the existing 3.3 + 1 ratio will work
+- For dynamic voltage, an updated ratio of 10 + 2.7 is required
+
+
