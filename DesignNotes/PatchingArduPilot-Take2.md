@@ -45,12 +45,31 @@ If the waves are detected to be large, turn the boat such that the oscilations a
 
 
 
-Detailed Notes: Battery Sensing
+Detailed Notes: 3G Telemetry
 ===============================
 - Requires software serial (as none of the hardware UARTs are avaliable)
+ - [https://github.com/menno-h/ardupilot/tree/master/libraries/SoftwareSerial](Possible source)
+ - On futher investigation, it's just standard arduino software serial, needs serious porting.
+ - Can steal the connector from the GPS.
 - This will need
-	- A high-resolution timer (sufficient for at least $9600 * 2$ ticks per second). That rate is possibly too fast to be successfully done with just the existing timing support.
+  - A high-resolution timer (sufficient for at least $9600 * 2$ ticks per second). That rate is possibly too fast to be successfully done with just the existing timing support.
   - Edge-triggered interrupt (for RX, should be avaliable on the servo inputs)
 
 
+Detailed Notes: Battery Sensing
+===============================
+- `AP_BattMonitor_Analog` needs to be edited/configured for our ADC-voltage ratio/equation
+- `AP_BattMonitor` needs the pin configured (using the various configuration parameters, `_VOLT_PIN` and `_VOLT_MULT`)
+
+Detailed Notes: Capsise / Waves
+===============================
+
+Add a task to the run queue (relatively high frequency) that records the attitude
+- Locate oscillations in the attitude, and their amplitude
+  - Maybe just look for high amplitude oscilations
+- If the amplitude is above a configurable max, switch driving mode to a target direction. Where that direction is corrected by the detected wave direction.
+  - Detect direction in the same function, feed into the naviation code as a target direction
+
+If the attitude detected is upside down for more than `n` seconds, go into power-save mode (no diving) and flag distress for next telemetry burst
+- Maybe trigger a telemetry burst immediately? (Desision can be made by telemetry code)
 
