@@ -54,8 +54,11 @@ Drawing a diagram where 0V is the common + rail shows that the battery voltage c
 However, this will lead to a negative relation between ADC reading and the battery voltage (assuming the output voltage is constant).
 If the output volage is the battery voltage, then the reading will be positively linear.
 
+Intial Investigation: The output voltage appears equal to the battery voltage (at least at above 12V)
+
 
 ### Equations (Assuming fixed output)
+If the output voltage is fixed at 12/24V.
 All voltages are relative to the common `+` rail, and calculated values are rounded to 3 decimal places.
 
 Battery divided voltage (max)
@@ -76,6 +79,7 @@ Analog input (min battery)
 $~-9.056 - -12 = ~2.944$
 
 ### Equations (Assuming dynamic output)
+If the output voltage follows the battery voltage.
 All voltages are relative to the common `+` rail, and calculated values are rounded to 3 decimal places.
 
 Battery divided voltage (max)
@@ -100,7 +104,7 @@ $3.1 = -V_{max} \times K - -V_{max}$
 $3.1 = -( V_{max} \times K - V_{max} )$
 $3.1 = -V_{max} \times (K - 1)$
 $3.1 = V_{max} \times (1 - K)$
-$\frac{3.1}{V_{max}} = 1 - K$
+$\frac{3.1}{V_{max}} = 1 - K$ <!-- _- -->
 
 
 For a max voltage of 14.5, the `K` ratio should be $0.786$. Putting a $10\Omega$ and a $2.7\Omega$ resistor arrangement will provide a `K` of $0.787$. (Giving an actual voltage of 3.08V)
@@ -110,5 +114,6 @@ For a max voltage of 14.5, the `K` ratio should be $0.786$. Putting a $10\Omega$
 In both cases, a resistor divider will work to provide the battery reading, the difference is the ideal ratio
 - For fixed voltage, the existing 3.3 + 1 ratio will work
 - For dynamic voltage, an updated ratio of 10 + 2.7 is required
+ > use 100K + 27K to give a passive drain of 1.1mW
 
 
