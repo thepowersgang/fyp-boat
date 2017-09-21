@@ -10,7 +10,7 @@ ROVERDIR := $(SRCDIR)APMrover2/
 # - Files with associated patches
 PATCHED_FILES := APMrover2/make.inc
 PATCHED_FILES += APMrover2/APMrover2.cpp APMrover2/Rover.h APMrover2/Rover.cpp
-PATCHED_FILES += 
+PATCHED_FILES += APMrover2/GCS_Mavlink.cpp	# Support for the MANUAL_CONTROL command
 # - Brand-new files
 NEW_FILES := APMrover2/satellite_telemetry.h APMrover2/satellite_telemetry.cpp
 NEW_FILES += libraries/UWA_IridiumSBD/UWA_IridiumSBD.h libraries/UWA_IridiumSBD/UWA_IridiumSBD.cpp

@@ -1,5 +1,5 @@
 diff --git a/APMrover2/Rover.h b/APMrover2/Rover.h
-index e2224ea..61c9fae 100644
+index e2224ea..718d750 100644
 --- a/APMrover2/Rover.h
 +++ b/APMrover2/Rover.h
 @@ -93,12 +93,15 @@
@@ -18,16 +18,17 @@ index e2224ea..61c9fae 100644
  
      Rover(void);
  
-@@ -173,6 +176,8 @@ private:
+@@ -173,6 +176,9 @@ private:
      SITL sitl;
  #endif
  
 +    IridiumTelemtry	m_satellite_telemetry;
++    GCS_MAVLINK m_satellite_gcs;
 +
      // GCS handling
      AP_SerialManager serial_manager;
      const uint8_t num_gcs;
-@@ -510,6 +515,8 @@ private:
+@@ -510,6 +516,8 @@ private:
      bool in_stationary_loiter(void);
      void set_loiter_active(const AP_Mission::Mission_Command& cmd);
  
