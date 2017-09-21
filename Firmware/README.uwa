@@ -1,0 +1,8 @@
+Steps to creating/uploading the firmware
+
+1. Download/compile customised APM firmware
+  - `make`
+2. Upload to the APM board
+  - Select "Upload firmware" when connected via USB (but not connected in APM Planner)
+3. Upload configuration
+  - Select "Full parameter list", and "load from file", select `../WorkingConfig.param`
