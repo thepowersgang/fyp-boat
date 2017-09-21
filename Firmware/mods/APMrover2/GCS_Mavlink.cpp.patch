@@ -1,8 +1,8 @@
 diff --git a/APMrover2/GCS_Mavlink.cpp b/APMrover2/GCS_Mavlink.cpp
-index e5e1654..fb52961 100644
+index e5e1654..27c744a 100644
 --- a/APMrover2/GCS_Mavlink.cpp
 +++ b/APMrover2/GCS_Mavlink.cpp
-@@ -1131,6 +1131,36 @@ void GCS_MAVLINK::handleMessage(mavlink_message_t* msg)
+@@ -1131,6 +1131,40 @@ void GCS_MAVLINK::handleMessage(mavlink_message_t* msg)
              break;
          }
  
@@ -11,7 +11,7 @@ index e5e1654..fb52961 100644
 +        if(msg->sysid != rover.g.sysid_my_gcs) break;                         // Only accept control from our gcs
 +        mavlink_manual_control_t    packet;
 +        mavlink_msg_manual_control_decode(msg, &packet);
-+        int16_t v[6];
++        int16_t v[8];
 +
 +        // -UWA- Translate manual control messages to fixed raw RC values
 +        // Input values are -1000 to 1000, output values are 1100 to 1900
@@ -19,15 +19,19 @@ index e5e1654..fb52961 100644
 +        const int16_t  MAX = 1000;
 +        const int16_t  PWM_RANGE = 400;
 +        const int16_t  PWM_MID = 1500;
-+        v[0] = packet.y * PWM_RANGE / MAX + PWM_MID;    // Roll (aka turning)
-+        v[1] = packet.x * PWM_RANGE / MAX + PWM_MID;    // Pitch
-+        v[2] = packet.z * PWM_RANGE / MAX + PWM_MID;    // Throttle.
-+        v[3] = packet.r * PWM_RANGE / MAX + PWM_MID;    // Yaw
++	packet.y = (packet.y + 1000) / 2;	// HACK: Possible bug in APM planner code
++	packet.x = (packet.x + 1000) / 2;	// HACK: Possible bug in APM planner code
++	packet.r = (packet.r + 1000) / 2;	// HACK: Possible bug in APM planner code
++        v[0] = int32_t(packet.y) * PWM_RANGE / MAX + PWM_MID;    // Roll (aka turning)
++        v[1] = int32_t(packet.x) * PWM_RANGE / MAX + PWM_MID;    // Pitch
++        v[2] = int32_t(packet.z) * PWM_RANGE / MAX + PWM_MID;    // Throttle.
++        v[3] = int32_t(packet.r) * PWM_RANGE / MAX + PWM_MID;    // Yaw
 +        v[4] = 1500;
 +        v[5] = 1500;
 +        v[6] = 1500;
 +        v[7] = 1500;
 +        // TODO: Modes/buttons.
++        //rover.gcs_send_text_fmt(PSTR("2=Z %i=%i"), v[2], packet.z); 
 +
 +        hal.rcin->set_overrides(v, 8);
 +
