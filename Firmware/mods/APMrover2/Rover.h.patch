@@ -1,12 +1,16 @@
 diff --git a/APMrover2/Rover.h b/APMrover2/Rover.h
-index e2224ea..718d750 100644
+index e2224ea..0d71147 100644
 --- a/APMrover2/Rover.h
 +++ b/APMrover2/Rover.h
-@@ -93,12 +93,15 @@
+@@ -93,12 +93,19 @@
  #include "Parameters.h"
  #include <GCS_MAVLink/GCS.h>
  
++#if USE_SATTELITE
 +#include "satellite_telemetry.h"
++#else
++#include "low_bandwidth_telemetry.h"
++#endif
 +
  #include <AP_Declination/AP_Declination.h> // ArduPilot Mega Declination Helper Library
  
@@ -18,17 +22,20 @@ index e2224ea..718d750 100644
  
      Rover(void);
  
-@@ -173,6 +176,9 @@ private:
+@@ -173,6 +180,12 @@ private:
      SITL sitl;
  #endif
  
++#if USE_SATTELITE
 +    IridiumTelemtry	m_satellite_telemetry;
-+    GCS_MAVLINK m_satellite_gcs;
++#else
++    LowBandwidthTelemetry m_slow_telemetry;
++#endif
 +
      // GCS handling
      AP_SerialManager serial_manager;
      const uint8_t num_gcs;
-@@ -510,6 +516,8 @@ private:
+@@ -510,6 +523,8 @@ private:
      bool in_stationary_loiter(void);
      void set_loiter_active(const AP_Mission::Mission_Command& cmd);
  

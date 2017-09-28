@@ -1,12 +1,16 @@
 diff --git a/APMrover2/Rover.cpp b/APMrover2/Rover.cpp
-index 3a2250c..bbdd4b9 100644
+index 3a2250c..189be67 100644
 --- a/APMrover2/Rover.cpp
 +++ b/APMrover2/Rover.cpp
-@@ -35,6 +35,7 @@ Rover::Rover(void) :
+@@ -35,6 +35,11 @@ Rover::Rover(void) :
              FUNCTOR_BIND_MEMBER(&Rover::verify_command_callback, bool, const AP_Mission::Mission_Command&),
              FUNCTOR_BIND_MEMBER(&Rover::exit_mission, void)),
      num_gcs(MAVLINK_COMM_NUM_BUFFERS),
++#if USE_SATTELITE
 +    m_satellite_telemetry(*this),
++#else
++    m_slow_telemetry(this->gcs[2]),
++#endif
      ServoRelayEvents(relay),
  #if CAMERA == ENABLED
      camera(&relay),

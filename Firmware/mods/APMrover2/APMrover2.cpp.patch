@@ -1,5 +1,5 @@
 diff --git a/APMrover2/APMrover2.cpp b/APMrover2/APMrover2.cpp
-index 26e9129..9e7d07f 100644
+index 26e9129..d9e97b1 100644
 --- a/APMrover2/APMrover2.cpp
 +++ b/APMrover2/APMrover2.cpp
 @@ -72,6 +72,7 @@ const AP_Scheduler::Task Rover::scheduler_tasks[] PROGMEM = {
@@ -10,13 +10,17 @@ index 26e9129..9e7d07f 100644
  #if FRSKY_TELEM_ENABLED == ENABLED
      { SCHED_TASK(frsky_telemetry_send),  10,    100 }
  #endif
-@@ -137,6 +138,11 @@ void Rover::loop()
+@@ -137,6 +138,15 @@ void Rover::loop()
      scheduler.run(remaining);
  }
  
 +void Rover::satellite_telemetry(void)
 +{
++#if USE_SATTELITE
 +    this->m_satellite_telemetry.update();
++#else
++    this->m_slow_telemetry.update();
++#endif
 +}
 +
  // update AHRS system
