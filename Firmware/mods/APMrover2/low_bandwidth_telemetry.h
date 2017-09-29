@@ -11,6 +11,7 @@ class LowBandwidthTelemetry
 public:
     LowBandwidthTelemetry(GCS_MAVLINK& gcs);
 
+    void setup();
     void update();
 
 private:

@@ -1,16 +1,28 @@
 diff --git a/APMrover2/APMrover2.cpp b/APMrover2/APMrover2.cpp
-index 26e9129..d9e97b1 100644
+index 26e9129..423a2b8 100644
 --- a/APMrover2/APMrover2.cpp
 +++ b/APMrover2/APMrover2.cpp
 @@ -72,6 +72,7 @@ const AP_Scheduler::Task Rover::scheduler_tasks[] PROGMEM = {
      { SCHED_TASK(compass_accumulate),     1,    900 },
      { SCHED_TASK(update_notify),          1,    300 },
      { SCHED_TASK(one_second_loop),       50,   3000 },
-+    { SCHED_TASK(satellite_telemetry),   20,  15000 },	 // Note, this is enough to send about 28 bytes, so during transmit overrun is very likely
++    { SCHED_TASK(satellite_telemetry),   10,   5000 }	// Checked 5 times a second (to allow sending in bursts)
  #if FRSKY_TELEM_ENABLED == ENABLED
      { SCHED_TASK(frsky_telemetry_send),  10,    100 }
  #endif
-@@ -137,6 +138,15 @@ void Rover::loop()
+@@ -99,6 +100,11 @@ void Rover::setup()
+ 
+     init_ardupilot();
+ 
++#if USE_SATTELITE
++#else
++    m_slow_telemetry.setup();
++#endif
++
+     // initialise the main loop scheduler
+     scheduler.init(&scheduler_tasks[0], ARRAY_SIZE(scheduler_tasks));
+ }
+@@ -137,6 +143,15 @@ void Rover::loop()
      scheduler.run(remaining);
  }
  

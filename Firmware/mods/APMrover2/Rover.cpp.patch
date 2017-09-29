@@ -1,5 +1,5 @@
 diff --git a/APMrover2/Rover.cpp b/APMrover2/Rover.cpp
-index 3a2250c..189be67 100644
+index 3a2250c..8f11355 100644
 --- a/APMrover2/Rover.cpp
 +++ b/APMrover2/Rover.cpp
 @@ -35,6 +35,11 @@ Rover::Rover(void) :
@@ -9,7 +9,7 @@ index 3a2250c..189be67 100644
 +#if USE_SATTELITE
 +    m_satellite_telemetry(*this),
 +#else
-+    m_slow_telemetry(this->gcs[2]),
++    m_slow_telemetry(this->gcs[1]),
 +#endif
      ServoRelayEvents(relay),
  #if CAMERA == ENABLED

@@ -1,5 +1,5 @@
 diff --git a/APMrover2/Rover.h b/APMrover2/Rover.h
-index e2224ea..0d71147 100644
+index e2224ea..d62203c 100644
 --- a/APMrover2/Rover.h
 +++ b/APMrover2/Rover.h
 @@ -93,12 +93,19 @@
@@ -22,9 +22,9 @@ index e2224ea..0d71147 100644
  
      Rover(void);
  
-@@ -173,6 +180,12 @@ private:
-     SITL sitl;
- #endif
+@@ -178,6 +185,12 @@ private:
+     const uint8_t num_gcs;
+     GCS_MAVLINK gcs[MAVLINK_COMM_NUM_BUFFERS];
  
 +#if USE_SATTELITE
 +    IridiumTelemtry	m_satellite_telemetry;
@@ -32,9 +32,9 @@ index e2224ea..0d71147 100644
 +    LowBandwidthTelemetry m_slow_telemetry;
 +#endif
 +
-     // GCS handling
-     AP_SerialManager serial_manager;
-     const uint8_t num_gcs;
+     // a pin for reading the receiver RSSI voltage. The scaling by 0.25 
+     // is to take the 0 to 1024 range down to an 8 bit range for MAVLink
+     AP_HAL::AnalogSource *rssi_analog_source;
 @@ -510,6 +523,8 @@ private:
      bool in_stationary_loiter(void);
      void set_loiter_active(const AP_Mission::Mission_Command& cmd);

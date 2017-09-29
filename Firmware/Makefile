@@ -14,6 +14,7 @@ PATCHED_FILES += APMrover2/GCS_Mavlink.cpp	# Support for the MANUAL_CONTROL comm
 # - Brand-new files
 NEW_FILES := APMrover2/satellite_telemetry.h APMrover2/satellite_telemetry.cpp
 NEW_FILES += libraries/UWA_IridiumSBD/UWA_IridiumSBD.h libraries/UWA_IridiumSBD/UWA_IridiumSBD.cpp
+NEW_FILES += APMrover2/low_bandwidth_telemetry.h APMrover2/low_bandwidth_telemetry.cpp
 
 NEW_FILES := $(addprefix $(SRCDIR),$(NEW_FILES))
 PATCHED_FILES := $(addprefix $(SRCDIR),$(PATCHED_FILES))
