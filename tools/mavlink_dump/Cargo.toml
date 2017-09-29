@@ -1,0 +1,9 @@
+[package]
+name = "mavlink_dump"
+version = "0.1.0"
+authors = ["John Hodge <tpg@mutabah.net>"]
+
+[dependencies]
+byteorder = "1.0"
+serial = "0.4"
+crc16 = "0.3"
