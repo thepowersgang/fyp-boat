@@ -1,0 +1,6 @@
+[package]
+name = "dumb_proxy"
+version = "0.1.0"
+authors = ["John Hodge <tpg@ucc.asn.au>"]
+
+[dependencies]
