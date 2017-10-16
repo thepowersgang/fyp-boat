@@ -24,8 +24,8 @@ static MAVLINK_MESSAGE_CRCS: [u8; 256] =[
 	  0,   0,   0,   0, 175, 102, 158, 208,   56,  93,   0,   0,   0,   0, 235,  93,	// 6_
 	124,   0,   0,   0,   0,   0,   0,   0,    0,   0,   0,   0,   0,   0,   0,   0,	// 7_
 	  0,   0,   0,   0,   0,   0,   0,   0,    0,   0,   0,   0,   0,   0,   0,   0,	// 8_
-	  0,   0,   0,  42, 241,  15,   0,   0,    0,   0,   0,   0,   0,   0,   0,   0,	// 9_
-	  0,   0,   0, 127,   0,   0,   0,   0,    0,   0,   0,   0,   0,   0,   0,   0,	// A_
+	  0,   0,   0,  42, 241,  15,   0,   0,  208,   0,   0,   0,   0,   0,   0,   0,	// 9_
+	  0,   0,   0, 127,   0,  21,   0,   0,    0,   0,   0,   0,   0,   0,   0,   0,	// A_
 	  0,   0,   0,   0,   0,   0,   0,   0,    0,   0,   0,   0,   0,   0,   0,   0,	// B_
 	  0,   0,   0,   0,   0,   0,   0,   0,    0,   0,   0,   0,   0,   0,   0,   0,	// C_
 	  0,   0,   0,   0,   0,   0,   0,   0,    0,   0,   0,   0,   0,   0,   0,   0,	// D_
@@ -88,6 +88,10 @@ fn handle_client(mut stream: ::std::net::TcpStream)
 		let f = match Header::read(&mut stream)
 			{
 			Err(ref e) if e.kind() == io::ErrorKind::TimedOut => continue,
+			Err(ref e) if e.kind() == io::ErrorKind::UnexpectedEof => {
+				info!("Client disconnected");
+				return;
+				},
 			Err(e) => {
 				error!("Error reading header - {}, trying again", e);
 				continue
