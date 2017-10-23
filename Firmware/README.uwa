@@ -1,5 +1,10 @@
 Steps to creating/uploading the firmware
 
+Dependencies (for Ubuntu/Debian):
+- `make` (from `build-essentials`)
+- `git` (for downloading the ardupilot source)
+- `gcc-avr`
+
 1. Download/compile customised APM firmware
   - `make`
 2. Upload to the APM board

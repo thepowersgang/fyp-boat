@@ -4,6 +4,8 @@
 
 .PHONY: all clean init repatch
 
+ARDUPILOT_REV_HASH := 681f6d39df909a66c6709a3381dec3b7c4607dc5
+
 SRCDIR := ardupilot-source/
 ROVERDIR := $(SRCDIR)APMrover2/
 
@@ -31,8 +33,8 @@ ardupilot-source/APMrover2/APMrover2.elf: ardupilot-source/APMrover2/Makefile $(
 	BUILDROOT=$(abspath builddir/) $(MAKE) -C $(dir $@) apm2
 
 init:
-	-git clone https://github.com/ArduPilot/ardupilot.git ardupilot-source
-	(cd ardupilot-source; git checkout master-AVR)
+	-git clone https://github.com/ArduPilot/ardupilot.git ardupilot-source -n
+	(cd ardupilot-source; git checkout $(ARDUPILOT_REV_HASH))
 	(cd ardupilot-source; git submodule update --init --recursive)
 
 ardupilot-source/APMrover2/Makefile:

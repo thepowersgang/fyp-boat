@@ -1,16 +1,20 @@
 diff --git a/APMrover2/APMrover2.cpp b/APMrover2/APMrover2.cpp
-index 26e9129..423a2b8 100644
+index 26e9129..adce44c 100644
 --- a/APMrover2/APMrover2.cpp
 +++ b/APMrover2/APMrover2.cpp
-@@ -72,6 +72,7 @@ const AP_Scheduler::Task Rover::scheduler_tasks[] PROGMEM = {
+@@ -72,8 +72,10 @@ const AP_Scheduler::Task Rover::scheduler_tasks[] PROGMEM = {
      { SCHED_TASK(compass_accumulate),     1,    900 },
      { SCHED_TASK(update_notify),          1,    300 },
      { SCHED_TASK(one_second_loop),       50,   3000 },
-+    { SCHED_TASK(satellite_telemetry),   10,   5000 }	// Checked 5 times a second (to allow sending in bursts)
++    { SCHED_TASK(satellite_telemetry),   10,   5000 },	// Checked 5 times a second (to allow sending in bursts)
++    { SCHED_TASK(boat_failsafes),        50,   1000 }	// Run once a second (just checks slow-moving values)
  #if FRSKY_TELEM_ENABLED == ENABLED
-     { SCHED_TASK(frsky_telemetry_send),  10,    100 }
+-    { SCHED_TASK(frsky_telemetry_send),  10,    100 }
++    ,{ SCHED_TASK(frsky_telemetry_send),  10,    100 }
  #endif
-@@ -99,6 +100,11 @@ void Rover::setup()
+ };
+ 
+@@ -99,6 +101,11 @@ void Rover::setup()
  
      init_ardupilot();
  
@@ -22,7 +26,7 @@ index 26e9129..423a2b8 100644
      // initialise the main loop scheduler
      scheduler.init(&scheduler_tasks[0], ARRAY_SIZE(scheduler_tasks));
  }
-@@ -137,6 +143,15 @@ void Rover::loop()
+@@ -137,6 +144,74 @@ void Rover::loop()
      scheduler.run(remaining);
  }
  
@@ -33,6 +37,65 @@ index 26e9129..423a2b8 100644
 +#else
 +    this->m_slow_telemetry.update();
 +#endif
++}
++void Rover::boat_failsafes(void)
++{
++    // 1. Check if the roll is greater than 100 degrees
++    // - If it is, set mode to HOLD (i.e. motor off)
++    // - Mark failsafe triggered, to resume AUTO if the condition clears.
++    // - Record failsafe trigger
++    {
++        const double TRIGGER_ANGLE = 100./127*3.141592; // Assume upside down when more than 100 degrees from flat (i.e have tipped)
++        const double UNTRIGGER_ANGLE = 30./127*3.141592;    // Assume good again when +- 30 degrees from flat
++        if( !m_roll_failsafe_triggered )
++        {
++            bool roll_good = (-TRIGGER_ANGLE < ahrs.roll && ahrs.roll < TRIGGER_ANGLE);
++            if( !roll_good ) {
++                // Roll failsafe trigger!
++                set_mode(HOLD);
++                m_roll_failsafe_triggered = true;
++                m_roll_failsafe_count ++;
++            }
++            else {
++                // All is good.
++            }
++        }
++        else
++        {
++            bool roll_good = (-UNTRIGGER_ANGLE < ahrs.roll && ahrs.roll < UNTRIGGER_ANGLE);
++            if( roll_good ) {
++                // De-asserted
++                set_mode(AUTO);
++                m_roll_failsafe_triggered = false;
++            }
++            else {
++                // Still bad, stay off
++            }
++        }
++    }
++
++    // 2. If the battery voltage falls below a fixed value, disable motors
++    {
++        const int STOP_VOLTAGE_MV = 12400;  // 12.4 volts
++        const int START_VOLTAGE_MV = 12900; // 12.9 volts, should be exceeded during active charging. (TODO: Confirm this)
++        
++        if( ! m_battery_failsafe_triggered )
++        {
++            if( battery.voltage() < STOP_VOLTAGE_MV )
++            {
++                m_battery_failsafe_triggered = true;
++                set_mode(HOLD);
++            }
++        }
++        else
++        {
++            if( battery.voltage() > START_VOLTAGE_MV )
++            {
++                m_battery_failsafe_triggered = false;
++                set_mode(AUTO);
++            }
++        }
++    }
 +}
 +
  // update AHRS system
