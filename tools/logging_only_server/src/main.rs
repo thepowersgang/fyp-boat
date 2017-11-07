@@ -51,16 +51,35 @@ fn main()
 			return ;
 			},
 		};
+	
+	let mut logfile = Logfile { file: ::std::fs::File::create("boat.log").expect("Unable to open `boat.log`") };
 
 	info!("SERVER STARTED on '{}'", listen_addr);
 	while let Ok( (stream, addr) ) = server.accept()
 	{
-		info!("Connection from {}", addr);
-		handle_client(stream);
+		logfile.log(format_args!("CONNECTION FROM {}", addr));
+		handle_client(stream, &mut logfile);
+		logfile.log(format_args!("> CONNECTION LOST FROM {}", addr));
+	}
+}
+
+// Structure to log to both stderr and to a file
+struct Logfile<F> {
+	file: F,
+}
+impl<F> Logfile<F>
+where
+	F: ::std::io::Write
+{
+	fn log(&mut self, a: ::std::fmt::Arguments) {
+		info!("LOGFILE {}", a);
+		let _ = write!(&mut self.file, "{} - ", ::chrono::Local::now().format("%F %T%.3f"));
+		let _ = self.file.write_fmt(a);
+		let _ = self.file.write_all(b"\n");
 	}
 }
 	
-fn handle_client(mut stream: ::std::net::TcpStream)
+fn handle_client<F: ::std::io::Write>(mut stream: ::std::net::TcpStream, logfile: &mut Logfile<F>)
 {
 	if false
 	{
@@ -130,7 +149,7 @@ fn handle_client(mut stream: ::std::net::TcpStream)
 			let p: ::mavlink::common::HEARTBEAT_DATA = ::mavlink::common::Parsable::parse(data);
 			println!("{:?}", p);
 
-			info!("HEARTBEAT mode={}",
+			logfile.log(format_args!("HEARTBEAT mode={}",
 				match p.custom_mode {
 				0 => "MANUAL",
 				2 => "LEARNING",
@@ -142,14 +161,14 @@ fn handle_client(mut stream: ::std::net::TcpStream)
 				16 => "INITIALISING",
 				_ => "?",
 				}
-				);
+				));
 			},
 		  1 => {
 			let p: ::mavlink::common::SYS_STATUS_DATA = ::mavlink::common::Parsable::parse(data);
 			println!("{:?}", p);
-			info!("SYS_STATUS cpu_load={}% battery_v={}mV battery={}%",
+			logfile.log(format_args!("SYS_STATUS cpu_load={}% battery_v={}mV battery={}%",
 				p.load/10, p.voltage_battery, p.battery_remaining
-				);
+				));
 		  	},
 		  2 => println!("SYSTEM_TIME"),
 		  4 => println!("PING"),
@@ -174,14 +193,14 @@ fn handle_client(mut stream: ::std::net::TcpStream)
 			let p: ::mavlink::common::GLOBAL_POSITION_INT_DATA = ::mavlink::common::Parsable::parse(data);
 			println!("{:?}", p);
 
-			info!("GLOBAL_POSITION_INT t={}ms lat={:.7} lon={:.7} alt={:.3} vx={}cms vy={}cms",
+			logfile.log(format_args!("GLOBAL_POSITION_INT t={}ms lat={:.7} lon={:.7} alt={:.3} vx={}cms vy={}cms",
 				p.time_boot_ms,
 				p.lat as f64 / 1e7,
 				p.lon as f64 / 1e7,
 				p.alt as f64 / 1e3,
 				p.vx,
 				p.vy,
-				);
+				));
 		 	},
 		 34 => println!("RC_CHANNELS_SCALED"),
 		 35 => println!("RC_CHANNELS_RAW"),
@@ -334,7 +353,12 @@ fn handle_client(mut stream: ::std::net::TcpStream)
 		250 => println!("DEBUG_VECT"),
 		251 => println!("NAMED_VALUE_FLOAT"),
 		252 => println!("NAMED_VALUE_INT"),
-		253 => println!("STATUSTEXT {:?}", String::from_utf8_lossy(&data[..data.iter().position(|&x| x==0).unwrap_or(0)])),
+		253 => {
+			let level = data[0];
+			let msg_bytes = &data[1..data.iter().position(|&x| x==0).unwrap_or(data.len() - 1)];
+			let msg_utf8 = String::from_utf8_lossy(msg_bytes);
+			println!("STATUSTEXT {} {:?}", level, msg_utf8);
+			},
 		254 => println!("DEBUG"),
 		255 => println!("EXTENDED_MESSAGE"),
 		_ => println!("UNK"),
